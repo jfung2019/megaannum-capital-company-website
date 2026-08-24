@@ -1,0 +1,29 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4: define design tokens (colors, fonts, breakpoints, etc.)."
+    },
+    {
+      "name": "@source",
+      "description": "Tailwind CSS v4: specify source files for class detection."
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind CSS v4: add custom utilities."
+    },
+    {
+      "name": "@variant",
+      "description": "Tailwind CSS v4: add custom variants."
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind CSS v4: define a custom variant."
+    },
+    {
+      "name": "@apply",
+      "description": "Tailwind CSS: inline utility classes."
+    }
+  ]
+}
