@@ -3,14 +3,12 @@ import HeroSection from "@/components/hero/HeroSection";
 import PlatformSection from "@/components/sections/PlatformSection";
 import StrategiesSection from "@/components/sections/StrategiesSection";
 import ContactSection from "@/components/sections/ContactSection";
-import OurPeopleSection from "@/components/sections/OurPeopleSection";
 import WorkingHereSection from "@/components/sections/WorkingHereSection";
 import NewsSection from "@/components/sections/NewsSection";
 import { getSiteContent } from "@/lib/cms/client";
 import {
   contactContent,
   heroContent,
-  peopleContent,
   platformContent,
 } from "@/lib/cms/map";
 
@@ -28,7 +26,6 @@ export default async function HomePage() {
       <PlatformSection content={platformContent(cms)} />
       <div data-page-continuation className="relative z-10">
         <StrategiesSection />
-        <OurPeopleSection content={peopleContent(cms)} />
         <WorkingHereSection />
         <NewsSection />
         <ContactSection content={contactContent(cms)} />

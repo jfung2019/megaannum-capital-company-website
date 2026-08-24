@@ -74,15 +74,19 @@ export default function WorkingHereSection({
     <section
       ref={sectionRef}
       id="working-here"
-      className={`w-full bg-[#f6f3ec] text-[#1a1714] ${className}`.trim()}
+      className={`relative w-full overflow-hidden bg-[#0b1d36] text-white ${className}`.trim()}
       aria-labelledby="working-here-heading"
     >
       <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_-10%,rgba(237,125,36,0.14),transparent_55%)]"
+        aria-hidden
+      />
+      <div
         ref={contentRef}
-        className="w-full px-6 py-24 opacity-0 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
+        className="relative w-full px-6 py-24 opacity-0 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
         <header className="max-w-3xl">
-          <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
+          <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-white/45 uppercase">
             {eyebrow}
           </p>
           <h2
@@ -91,12 +95,12 @@ export default function WorkingHereSection({
           >
             {heading}
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-black/60 md:text-[1.05rem] md:leading-8">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 md:text-[1.05rem] md:leading-8">
             {intro}
           </p>
         </header>
 
-        <div className="mt-16 grid gap-12 border-t border-black/10 pt-14 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-14">
+        <div className="mt-16 grid gap-12 border-t border-white/10 pt-14 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-14">
           {pillars.map((pillar) => (
             <article key={pillar.id}>
               <p className="font-mono text-[11px] tracking-[0.22em] text-[#ed7d24] uppercase">
@@ -107,7 +111,7 @@ export default function WorkingHereSection({
               >
                 {pillar.heading}
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-black/65 md:leading-8">
+              <p className="mt-4 text-base leading-relaxed text-white/65 md:leading-8">
                 {pillar.body}
               </p>
             </article>
@@ -116,7 +120,7 @@ export default function WorkingHereSection({
 
         <a
           href={cta.href}
-          className="mt-14 inline-flex items-center justify-center rounded-full bg-[#ed7d24] px-8 py-3.5 text-sm font-medium text-white transition hover:bg-[#d66e1a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed7d24] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f6f3ec]"
+          className="mt-14 inline-flex items-center justify-center rounded-full bg-[#ed7d24] px-8 py-3.5 text-sm font-medium text-white transition hover:bg-[#d66e1a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed7d24] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b1d36]"
         >
           {cta.label}
         </a>

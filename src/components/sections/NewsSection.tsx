@@ -67,14 +67,14 @@ export default function NewsSection({
 
   if (content.posts.length === 0) return null;
 
-  const { eyebrow, heading, seeAllLabel, posts } = content;
+  const { eyebrow, heading, seeAllLabel, seeAllHref, posts } = content;
   const [featured, ...rest] = posts;
 
   return (
     <section
       ref={sectionRef}
       id="news"
-      className={`w-full bg-[#0b1d36] text-white ${className}`.trim()}
+      className={`w-full bg-[#f6f3ec] text-[#1a1714] ${className}`.trim()}
       aria-labelledby="news-heading"
     >
       <div
@@ -83,7 +83,7 @@ export default function NewsSection({
       >
         <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-white/45 uppercase">
+            <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
               {eyebrow}
             </p>
             <h2
@@ -93,21 +93,23 @@ export default function NewsSection({
               {heading}
             </h2>
           </div>
-          <a
-            href="#news"
-            className="font-mono text-[11px] tracking-[0.18em] text-[#ed7d24] uppercase transition hover:text-white"
-          >
-            {seeAllLabel}
-          </a>
+          {seeAllHref ? (
+            <a
+              href={seeAllHref}
+              className="font-mono text-[11px] tracking-[0.18em] text-[#ed7d24] uppercase transition hover:text-[#1a1714]"
+            >
+              {seeAllLabel}
+            </a>
+          ) : null}
         </header>
 
-        <div className="mt-14 border-t border-white/10 pt-12 md:mt-16">
+        <div className="mt-14 border-t border-black/10 pt-12 md:mt-16">
           {featured ? (
             <article className="max-w-3xl pb-12 md:pb-14">
               <p className="font-mono text-[11px] tracking-[0.2em] text-[#ed7d24] uppercase">
                 {featured.tag}
-                <span className="mx-3 text-white/30">·</span>
-                <span className="text-white/45">{featured.date}</span>
+                <span className="mx-3 text-black/25">·</span>
+                <span className="text-black/45">{featured.date}</span>
               </p>
               <h3
                 className={`${playfair.className} mt-4 text-2xl font-medium tracking-tight md:text-3xl`}
@@ -121,7 +123,7 @@ export default function NewsSection({
                 )}
               </h3>
               {featured.excerpt ? (
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/65 md:leading-8">
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-black/65 md:leading-8">
                   {featured.excerpt}
                 </p>
               ) : null}
@@ -129,11 +131,11 @@ export default function NewsSection({
           ) : null}
 
           {rest.length > 0 ? (
-            <ul className="border-t border-white/10">
+            <ul className="border-t border-black/10">
               {rest.map((post) => (
                 <li
                   key={post.id}
-                  className="border-b border-white/10 py-7 md:grid md:grid-cols-[10rem_1fr_8rem] md:items-baseline md:gap-8 md:py-8"
+                  className="border-b border-black/10 py-7 md:grid md:grid-cols-[10rem_1fr_8rem] md:items-baseline md:gap-8 md:py-8"
                 >
                   <p className="font-mono text-[11px] tracking-[0.2em] text-[#ed7d24] uppercase">
                     {post.tag}
@@ -147,7 +149,7 @@ export default function NewsSection({
                       post.title
                     )}
                   </h3>
-                  <p className="mt-2 font-mono text-[11px] tracking-[0.14em] text-white/40 uppercase md:mt-0 md:text-right">
+                  <p className="mt-2 font-mono text-[11px] tracking-[0.14em] text-black/40 uppercase md:mt-0 md:text-right">
                     {post.date}
                   </p>
                 </li>

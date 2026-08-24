@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Megaannum Capital Limited | Hong Kong Type 9 AMC",
+  title: "Megaannum Capital Limited",
   description:
-    "Megaannum Capital Limited is a Hong Kong SFC Type 9 asset manager connecting sovereign and government-backed capital with frontier hard-tech private equity.",
+    "",
 };
 
 export default function RootLayout({

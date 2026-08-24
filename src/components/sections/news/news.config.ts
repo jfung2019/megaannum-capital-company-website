@@ -11,6 +11,8 @@ export type NewsContent = {
   eyebrow: string;
   heading: string;
   seeAllLabel: string;
+  /** Omit until there is an archive route; the label is kept for that later link. */
+  seeAllHref?: string;
   posts: NewsPost[];
 };
 
