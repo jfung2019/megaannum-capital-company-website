@@ -117,9 +117,7 @@ export default function PlatformSectionContent({
 
         <dl
           ref={statsRef}
-          className={`mt-14 grid gap-12 md:mt-16 md:gap-10 lg:mt-20 lg:gap-12 ${
-            stats.length === 1 ? "md:grid-cols-1" : "md:grid-cols-3"
-          }`}
+          className="mx-auto mt-14 grid max-w-4xl gap-12 text-center md:mt-16 md:grid-cols-3 md:gap-8 lg:mt-20 lg:gap-12"
         >
           {stats.map((stat) => (
             <div

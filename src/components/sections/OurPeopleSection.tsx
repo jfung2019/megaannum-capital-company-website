@@ -236,12 +236,9 @@ export default function OurPeopleSection({
                     aria-hidden
                   />
                   <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
-                    <p className="font-mono text-[10px] tracking-[0.2em] text-[#ed7d24] uppercase">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
                     <h3
                       data-person-name
-                      className={`${playfair.className} mt-2 text-2xl font-medium tracking-tight md:text-[1.65rem]`}
+                      className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.65rem]`}
                     >
                       {member.name}
                     </h3>

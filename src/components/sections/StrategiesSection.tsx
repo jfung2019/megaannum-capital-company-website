@@ -119,11 +119,8 @@ export default function StrategiesSection({
             <li
               key={item.id}
               data-strategy-row
-              className="grid gap-4 border-b border-black/10 py-10 opacity-0 md:grid-cols-[7rem_minmax(0,14rem)_1fr] md:gap-10 md:py-12 lg:grid-cols-[8rem_minmax(0,16rem)_1fr]"
+              className="grid gap-4 border-b border-black/10 py-10 opacity-0 md:grid-cols-[minmax(0,16rem)_1fr] md:gap-10 md:py-12 lg:grid-cols-[minmax(0,18rem)_1fr]"
             >
-              <p className="font-mono text-[11px] tracking-[0.22em] text-[#ed7d24] uppercase">
-                {item.eyebrow}
-              </p>
               <h3
                 className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
               >

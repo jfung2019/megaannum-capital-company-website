@@ -23,12 +23,25 @@ export type PlatformContent = {
 export const PLATFORM_CONTENT: PlatformContent = {
   headline: "Translating high-science into private equity",
   intro:
-    "We sit in a deep academic and CAS research ecosystem, screening scientific work for commercial use before technologies enter public markets. A separate commercialization arm scales prototypes; our SFC Type 9 asset-management company focuses on fund allocation. The book is concentrated in three hard-tech sectors: robotics, deep energy transition, and advanced manufacturing.",
+    "We sit in a deep academic and CAS research ecosystem, screening scientific work for commercial use before technologies enter public markets. A separate commercialization arm scales prototypes; our SFC Type 9 asset-management company focuses on fund allocation.",
   stats: [
+    {
+      value: 1,
+      from: 0,
+      prefix: "0",
+      label: "Robotics",
+    },
+    {
+      value: 2,
+      from: 0,
+      prefix: "0",
+      label: "Deep energy transition",
+    },
     {
       value: 3,
       from: 0,
-      label: "Core hard-tech sectors",
+      prefix: "0",
+      label: "Advanced manufacturing",
     },
   ],
   footnote: "",
