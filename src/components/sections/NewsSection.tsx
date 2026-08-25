@@ -105,7 +105,7 @@ export default function NewsSection({
 
         <div className="mt-14 border-t border-black/10 pt-12 md:mt-16">
           {featured ? (
-            <article className="max-w-3xl pb-12 md:pb-14">
+            <article className="max-w-5xl pb-12 md:pb-14">
               <p className="font-mono text-[11px] tracking-[0.2em] text-[#ed7d24] uppercase">
                 {featured.tag}
                 <span className="mx-3 text-black/25">·</span>
@@ -123,7 +123,7 @@ export default function NewsSection({
                 )}
               </h3>
               {featured.excerpt ? (
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-black/65 md:leading-8">
+                <p className="mt-4 max-w-4xl text-base leading-relaxed text-black/65 md:leading-8">
                   {featured.excerpt}
                 </p>
               ) : null}

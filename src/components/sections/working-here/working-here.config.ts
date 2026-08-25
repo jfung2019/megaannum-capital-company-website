@@ -38,11 +38,11 @@ export const WORKING_HERE_CONTENT: WorkingHereContent = {
       id: "collegiality",
       eyebrow: "Collegiality",
       heading: "Work with specialists",
-      body: "Scientists, operators, and investors in the same argument: whether a Chinese deep technology company can travel from the lab into Middle Eastern, Asian, and other global markets.",
+      body: "Our senior leadership team brings together expertise from top tier investment banks, quantitative hedge funds and established private equity firms. We combine proprietary deal sourcing, institutional grade underwriting and active portfolio management with a disciplined approach to exit execution. Our team applies rigorous financial analysis and operational expertise to each investment, working alongside management to build lasting value. Beyond technical capability, we value intellectual curiosity, integrity and a genuine commitment to partnership with the companies we support.",
     },
   ],
   cta: {
     label: "Explore opportunities",
-    href: "mailto:careers@megaannum.com",
+    href: "mailto:careers@megaannumcap.com",
   },
 };

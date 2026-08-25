@@ -27,7 +27,7 @@ export default function PlatformSectionContent({
 }: PlatformSectionContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDListElement>(null);
-  const { headline, intro, stats, footnote } = content;
+  const { headline, intro, introHeadings, stats, footnote } = content;
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -99,7 +99,7 @@ export default function PlatformSectionContent({
       className={`flex min-h-svh w-full flex-col justify-center text-white ${className}`.trim()}
     >
       <div className="w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20">
-        <div className="mx-auto flex max-w-3xl flex-col items-center border-b border-white/25 pb-14 text-center md:pb-16 lg:pb-20">
+        <div className="mx-auto flex max-w-6xl flex-col items-center border-b border-white/25 pb-14 text-center md:pb-16 lg:pb-20">
           <h2
             id="approach-heading"
             className={`${playfair.className} text-[2.35rem] leading-[1.12] font-medium tracking-tight text-white md:text-5xl md:leading-[1.1] lg:text-[3.35rem] lg:leading-[1.08]`}
@@ -110,9 +110,20 @@ export default function PlatformSectionContent({
             {headline}
           </h2>
 
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/85 md:mt-10 md:text-[1.05rem] md:leading-8">
-            {intro}
-          </p>
+          <div className="mt-8 max-w-5xl space-y-8 text-base leading-relaxed text-white/85 md:mt-10 md:text-[1.05rem] md:leading-8">
+            {intro.split("\n\n").map((paragraph, index) => (
+              <div key={index}>
+                {introHeadings[index] ? (
+                  <p
+                    className={`${playfair.className} mb-3 text-lg font-medium text-white md:text-xl`}
+                  >
+                    {introHeadings[index]}
+                  </p>
+                ) : null}
+                <p>{paragraph}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <dl

@@ -99,7 +99,7 @@ export default function StrategiesSection({
         ref={contentRef}
         className="w-full px-6 py-24 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
-        <header data-strategy-header className="max-w-3xl opacity-0">
+        <header data-strategy-header className="max-w-6xl opacity-0">
           <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
             {eyebrow}
           </p>
@@ -109,7 +109,7 @@ export default function StrategiesSection({
           >
             {heading}
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-black/60 md:text-[1.05rem] md:leading-8">
+          <p className="mt-6 max-w-5xl text-base leading-relaxed text-black/60 md:text-[1.05rem] md:leading-8">
             {intro}
           </p>
         </header>
@@ -126,9 +126,11 @@ export default function StrategiesSection({
               >
                 {item.heading}
               </h3>
-              <p className="max-w-xl text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
-                {item.body}
-              </p>
+              <div className="space-y-4 text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
+                {item.body.split("\n\n").map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
             </li>
           ))}
         </ul>

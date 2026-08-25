@@ -24,9 +24,9 @@ export const CONTACT_CONTENT: ContactContent = {
   subhead:
     "Speak with our team about co-investments, dedicated fund structures, or professional access to China’s deep technology sector from Hong Kong.",
   details: [
-    { label: "Investor relations", value: "ir@megaannum.com", href: "mailto:ir@megaannum.com" },
-    { label: "General inquiries", value: "hello@megaannum.com", href: "mailto:hello@megaannum.com" },
-    { label: "Careers", value: "careers@megaannum.com", href: "mailto:careers@megaannum.com" },
+    { label: "Investor relations", value: "ir@megaannumcap.com", href: "mailto:ir@megaannumcap.com" },
+    { label: "General inquiries", value: "enquiries@megaannumcap.com", href: "mailto:enquiries@megaannumcap.com" },
+    { label: "Careers", value: "careers@megaannumcap.com", href: "mailto:careers@megaannumcap.com" },
     { label: "Headquarters", value: "Hong Kong", href: undefined },
   ],
   form: {

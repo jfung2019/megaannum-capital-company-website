@@ -107,6 +107,7 @@ describe("mapping a published payload", () => {
     expect(platformContent(raw)).toEqual({
       headline: "Published heading",
       intro: "Published paragraph.",
+      introHeadings: [],
       stats: [
         { value: 41, prefix: "$", suffix: "B", label: "Assets under intelligence" },
         { value: 20000, suffix: "+", label: "Decisions made" },

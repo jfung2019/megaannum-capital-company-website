@@ -14,6 +14,12 @@ export type PlatformContent = {
   /** Rendered as one heading; the CMS stores it as a single string. */
   headline: string;
   intro: string;
+  /**
+   * One label per "\n\n"-separated paragraph in `intro`, shown above it.
+   * Bundled content only — no CMS source, so a published document renders
+   * without labels rather than with mismatched ones.
+   */
+  introHeadings: string[];
   stats: PlatformStat[];
   footnote: string;
   /** Section background, from the CMS accent colour. */
@@ -23,7 +29,11 @@ export type PlatformContent = {
 export const PLATFORM_CONTENT: PlatformContent = {
   headline: "A bridge between Chinese deep technology and global capital",
   intro:
-    "China has built world-class research and industrial capability in deep technology, but many projects stall at commercialization, capital access, and internationalization. International capital moving the other way faces its own barriers in screening, diligence, and portfolio management. We sit in the middle of that gap—embedded in the Chinese Academy of Sciences technology transfer ecosystem, and operating from Hong Kong in both directions.",
+    "China has accumulated world class research capabilities and industrial foundations in deep technology. The Chinese Academy of Sciences, as the country’s strategic scientific institution, continues to produce original breakthroughs in artificial intelligence, advanced materials, new energy and other fields. However, many high-quality deep technology projects face challenges in commercialisation, capital access, market expansion and internationalisation. By embedding ourselves within the Chinese Academy of Sciences technology transfer ecosystem, we help bring frontier research outcomes from the laboratory to global markets.\n\nInternational capital is accelerating its allocation to Chinese deep technology assets at an unprecedented pace. China’s rapid rise in new energy, artificial intelligence, semiconductors and other fields has created structural opportunities for global investors. However, international capital faces challenges in project screening, due diligence and portfolio management when entering the Chinese market. Our deep understanding of China’s industrial ecosystem and professional investment management capabilities enable us to connect international capital with quality investment opportunities in China’s deep technology sector.",
+  introHeadings: [
+    "Connecting Chinese Technology with Global Markets",
+    "Connecting International Capital with Chinese Opportunities",
+  ],
   stats: [
     {
       value: 5,

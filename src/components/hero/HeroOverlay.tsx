@@ -183,8 +183,10 @@ export default function HeroOverlay({
         className="pointer-events-auto absolute inset-x-0 bottom-0 border-y border-white/10 bg-[#0b1d36]/40 px-6 py-8 text-white opacity-0 shadow-2xl shadow-black/25 backdrop-blur-xl md:px-10 md:py-10 lg:px-14 xl:px-20"
       >
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-2xl text-base leading-relaxed text-white/85 md:text-lg md:leading-8">
-            <p>{body}</p>
+          <div className="flex flex-col gap-4 text-base leading-relaxed text-white/85 md:w-3/4 md:text-lg md:leading-8">
+            {body.split("\n\n").map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
           <div className="flex shrink-0 flex-wrap gap-4">
             <a

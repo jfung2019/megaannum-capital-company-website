@@ -122,9 +122,14 @@ export function platformContent(raw: unknown): PlatformContent {
   const stats = rows(edge.stats)
     ?.map((s) => parseStat(str(s.value, ""), str(s.label, "")))
     .filter((s): s is PlatformStat => s !== null && Boolean(s.label));
+  const intro = str(edge.paragraph, PLATFORM_CONTENT.intro);
   return {
     headline: str(edge.heading, PLATFORM_CONTENT.headline),
-    intro: str(edge.paragraph, PLATFORM_CONTENT.intro),
+    intro,
+    // No CMS source for these labels, and they're written for the bundled
+    // intro's two paragraphs specifically -- a published paragraph replacing
+    // it renders with no labels rather than ones that no longer line up.
+    introHeadings: intro === PLATFORM_CONTENT.intro ? PLATFORM_CONTENT.introHeadings : [],
     stats: stats?.length ? stats : PLATFORM_CONTENT.stats,
     footnote: asOf ? `All statistics as of ${asOf}` : PLATFORM_CONTENT.footnote,
     background: str(obj(root.general).accent, PLATFORM_CONTENT.background),

@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/hero/HeroSection";
+import MissionSection from "@/components/sections/MissionSection";
 import PlatformSection from "@/components/sections/PlatformSection";
 import StrategiesSection from "@/components/sections/StrategiesSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -23,6 +24,7 @@ export default async function HomePage() {
   return (
     <main className="relative bg-[#f6f3ec]">
       <HeroSection content={heroContent(cms)} />
+      <MissionSection />
       <PlatformSection content={platformContent(cms)} />
       <div data-page-continuation className="relative z-10">
         <StrategiesSection />

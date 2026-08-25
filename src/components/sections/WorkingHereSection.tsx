@@ -85,7 +85,7 @@ export default function WorkingHereSection({
         ref={contentRef}
         className="relative w-full px-6 py-24 opacity-0 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
-        <header className="max-w-3xl">
+        <header className="max-w-6xl">
           <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-white/45 uppercase">
             {eyebrow}
           </p>
@@ -95,7 +95,7 @@ export default function WorkingHereSection({
           >
             {heading}
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 md:text-[1.05rem] md:leading-8">
+          <p className="mt-6 max-w-5xl text-base leading-relaxed text-white/65 md:text-[1.05rem] md:leading-8">
             {intro}
           </p>
         </header>
