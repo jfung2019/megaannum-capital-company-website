@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+# build output
+.next
+out
+# git / local
+.git
+.claude
+# env (build can still receive CMS_* via compose)
+.env*
+!.env.example
+# misc
+npm-debug.log*
+*.pem
+.DS_Store

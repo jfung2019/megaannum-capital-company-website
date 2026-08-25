@@ -1,0 +1,14 @@
+services:
+  megaannum-capital:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: megaannum-capital
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      # Optional CMS. Unset, the site uses bundled copy.
+      CMS_API_BASE_URL: ${CMS_API_BASE_URL:-}
+      CMS_SITE_API_KEY: ${CMS_SITE_API_KEY:-}

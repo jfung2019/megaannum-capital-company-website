@@ -1,0 +1,1 @@
+# public assets (favicons, etc.) — required so the Docker image can COPY this folder
