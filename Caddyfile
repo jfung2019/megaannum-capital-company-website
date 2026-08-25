@@ -1,0 +1,3 @@
+megaannumcap.com, www.megaannumcap.com {
+	reverse_proxy megaannum-capital:3000
+}

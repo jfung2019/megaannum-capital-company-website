@@ -5,10 +5,29 @@ services:
       dockerfile: Dockerfile
     container_name: megaannum-capital
     restart: always
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       NODE_ENV: production
       # Optional CMS. Unset, the site uses bundled copy.
       CMS_API_BASE_URL: ${CMS_API_BASE_URL:-}
       CMS_SITE_API_KEY: ${CMS_SITE_API_KEY:-}
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: megaannum-caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - megaannum-capital
+
+volumes:
+  caddy_data:
+  caddy_config:

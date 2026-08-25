@@ -16,13 +16,19 @@ npm run dev
 
 ## Docker
 
-The image is a Next.js standalone build (`output: "standalone"`). On an Alibaba Cloud simple application server:
+The image is a Next.js standalone build (`output: "standalone"`). Caddy sits in front on 80/443 and issues HTTPS for `megaannumcap.com`.
+
+On the Alibaba server:
 
 ```bash
+cd /opt/megaannum-capital-company-website
+git pull
 docker compose up -d --build
 ```
 
-The site listens on port 3000. Point a reverse proxy (or the server firewall) at that port, or change the left-hand side of `ports` in `docker-compose.yml` to `80:3000`.
+Do not publish port 3000. Firewall should allow 80 and 443 only (plus 22 for SSH).
+
+If `www.megaannumcap.com` is not in DNS, remove that name from `Caddyfile`.
 
 Optional CMS vars (`CMS_API_BASE_URL`, `CMS_SITE_API_KEY`) can be set in a `.env` next to the compose file. Unset, the site uses bundled copy.
 
