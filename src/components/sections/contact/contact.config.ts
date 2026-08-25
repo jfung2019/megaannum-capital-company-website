@@ -22,7 +22,7 @@ export const CONTACT_CONTENT: ContactContent = {
   eyebrow: "Contact",
   heading: "Discuss a partnership or co-investment.",
   subhead:
-    "Speak with our team about Co-GP structures, hard-tech mandates, or how we work with professional investors from Hong Kong.",
+    "Speak with our team about co-investments, dedicated fund structures, or professional access to China’s deep technology sector from Hong Kong.",
   details: [
     { label: "Investor relations", value: "ir@megaannum.com", href: "mailto:ir@megaannum.com" },
     { label: "General inquiries", value: "hello@megaannum.com", href: "mailto:hello@megaannum.com" },

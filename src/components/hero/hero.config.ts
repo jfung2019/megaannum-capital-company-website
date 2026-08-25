@@ -38,12 +38,12 @@ export const HERO_CONTENT: HeroContent = {
   logo: null,
   brand: "Megaannum Capital Limited",
   headingLines: [
-    { text: "Frontier", color: "#ffffff" },
-    { text: "Technology", color: "#ed7d24" },
-    { text: "Capital", color: "#ffffff" },
+    { text: "Chinese", color: "#ffffff" },
+    { text: "Deep Technology", color: "#ed7d24" },
+    { text: "Global Capital", color: "#ffffff" },
   ],
   body:
-    "We bridge sovereign and government-backed capital with frontier hard tech. From Hong Kong, Megaannum Capital Limited coordinates cross-border technology transfer and co-investment with partners in the Middle East, Asia, and globally.",
+    "Megaannum Capital Limited is a Hong Kong private equity firm investing in growth-stage and pre-IPO technology companies. We hold deep roots in China’s industrial and technology ecosystem and a capital network across the Middle East, Southeast Asia, and other emerging markets—serving institutional investors, family offices, and industrial capital worldwide.",
   videoUrl: "https://www.pexels.com/download/video/36435706/",
   cta: {
     label: "Speak with us",

@@ -21,27 +21,27 @@ export type PlatformContent = {
 };
 
 export const PLATFORM_CONTENT: PlatformContent = {
-  headline: "Translating high-science into private equity",
+  headline: "A bridge between Chinese deep technology and global capital",
   intro:
-    "We sit in a deep academic and CAS research ecosystem, screening scientific work for commercial use before technologies enter public markets. A separate commercialization arm scales prototypes; our SFC Type 9 asset-management company focuses on fund allocation.",
+    "China has built world-class research and industrial capability in deep technology, but many projects stall at commercialization, capital access, and internationalization. International capital moving the other way faces its own barriers in screening, diligence, and portfolio management. We sit in the middle of that gap—embedded in the Chinese Academy of Sciences technology transfer ecosystem, and operating from Hong Kong in both directions.",
   stats: [
     {
-      value: 1,
+      value: 5,
       from: 0,
       prefix: "0",
-      label: "Robotics",
-    },
-    {
-      value: 2,
-      from: 0,
-      prefix: "0",
-      label: "Deep energy transition",
+      label: "Core sectors",
     },
     {
       value: 3,
       from: 0,
       prefix: "0",
-      label: "Advanced manufacturing",
+      label: "Strategic partnerships",
+    },
+    {
+      value: 4,
+      from: 0,
+      prefix: "0",
+      label: "Exit pathways",
     },
   ],
   footnote: "",

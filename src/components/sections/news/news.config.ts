@@ -27,12 +27,12 @@ export const NEWS_CONTENT: NewsContent = {
       title: "Megaannum Capital Limited: an introduction",
       date: "August 2026",
       excerpt:
-        "A Hong Kong Type 9 platform connecting sovereign and government-backed capital with frontier hard-tech private equity.",
+        "A Hong Kong private equity firm investing at growth stage and pre-IPO, connecting Chinese deep technology with global industrial capital.",
     },
     {
-      id: "hard-tech-note",
+      id: "deep-tech-note",
       tag: "Insights",
-      title: "Hard tech before the public market",
+      title: "Deep technology before the public market",
       date: "July 2026",
     },
     {
