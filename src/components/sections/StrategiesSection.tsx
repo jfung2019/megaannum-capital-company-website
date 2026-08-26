@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
+import { Atom, Bot, Cpu, Server, Zap, type LucideIcon } from "lucide-react";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
 import {
   STRATEGIES_CONTENT,
+  type SectorIcon,
   type StrategiesContent,
 } from "./strategies/strategies.config";
 
@@ -14,6 +16,14 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
+
+const SECTOR_ICONS: Record<SectorIcon, LucideIcon> = {
+  ai: Cpu,
+  manufacturing: Bot,
+  energy: Zap,
+  semiconductors: Server,
+  frontier: Atom,
+};
 
 type StrategiesSectionProps = {
   className?: string;
@@ -115,24 +125,69 @@ export default function StrategiesSection({
         </header>
 
         <ul className="mt-16 border-t border-black/10 md:mt-20">
-          {items.map((item) => (
-            <li
-              key={item.id}
-              data-strategy-row
-              className="grid gap-4 border-b border-black/10 py-10 opacity-0 md:grid-cols-[minmax(0,16rem)_1fr] md:gap-10 md:py-12 lg:grid-cols-[minmax(0,18rem)_1fr]"
-            >
-              <h3
-                className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
+          {items.map((item) =>
+            item.type === "row" ? (
+              <li
+                key={item.id}
+                data-strategy-row
+                className="grid gap-4 border-b border-black/10 py-10 opacity-0 md:grid-cols-[minmax(0,16rem)_1fr] md:gap-10 md:py-12 lg:grid-cols-[minmax(0,18rem)_1fr]"
               >
-                {item.heading}
-              </h3>
-              <div className="space-y-4 text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
-                {item.body.split("\n\n").map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-            </li>
-          ))}
+                <h3
+                  className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
+                >
+                  {item.heading}
+                </h3>
+                <div className="space-y-4 text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
+                  {item.body.split("\n\n").map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              </li>
+            ) : (
+              <li
+                key={item.id}
+                data-strategy-row
+                className="border-b border-black/10 py-10 opacity-0 md:py-12"
+              >
+                <h3
+                  className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
+                >
+                  {item.heading}
+                </h3>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
+                  {item.intro}
+                </p>
+                <p className="mt-6 text-sm text-black/45">{item.lead}</p>
+
+                <div className="mt-6 grid grid-cols-1 border-t border-l border-black/10 sm:grid-cols-2 lg:grid-cols-5">
+                  {item.sectors.map((sector) => {
+                    const Icon = SECTOR_ICONS[sector.icon];
+                    return (
+                      <div
+                        key={sector.id}
+                        className="border-r border-b border-black/10 p-6"
+                      >
+                        <Icon
+                          size={22}
+                          strokeWidth={1.5}
+                          className="text-[#ed7d24]"
+                          aria-hidden
+                        />
+                        <p
+                          className={`${playfair.className} mt-4 text-base leading-snug font-medium tracking-tight`}
+                        >
+                          {sector.heading}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-black/55">
+                          {sector.body}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+            ),
+          )}
         </ul>
       </div>
     </section>

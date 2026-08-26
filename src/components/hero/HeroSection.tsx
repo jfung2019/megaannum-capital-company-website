@@ -13,26 +13,9 @@ export default function HeroSection({
   return (
     <section
       id="home"
-      className={`relative h-svh w-full overflow-hidden bg-[#0b1d36] ${className}`.trim()}
+      className={`relative w-full bg-[#0b1d36] ${className}`.trim()}
       aria-label="Megaannum Capital Limited introduction"
     >
-      {/* src on the element, not a typed <source>: the CMS serves whatever mime
-          was uploaded and a wrong `type` makes the browser skip the file. */}
-      <video
-        key={content.videoUrl}
-        src={content.videoUrl}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden
-      />
-
-      <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,29,54,0.42)_0%,rgba(11,29,54,0.22)_45%,rgba(11,29,54,0.88)_100%)]"
-        aria-hidden
-      />
       <HeroOverlay content={content} />
     </section>
   );

@@ -21,8 +21,8 @@ export default function HeroOverlay({
   className = "",
   content = HERO_CONTENT,
 }: HeroOverlayProps) {
-  const { logo, brand, headingLines: lines, body, cta } = content;
-  const rootRef = useRef<HTMLElement>(null);
+  const { logo, brand, headingLines: lines, body, videoUrl, cta } = content;
+  const rootRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const headingLineRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,109 +78,133 @@ export default function HeroOverlay({
   }, [menuOpen]);
 
   return (
-    <header
-      ref={rootRef}
-      className={`pointer-events-none absolute inset-0 z-10 flex h-full flex-col ${className}`.trim()}
-    >
-      <nav className="pointer-events-auto flex items-center justify-between px-6 py-6 md:px-10 md:py-8 lg:px-14 xl:px-20">
-        {logo ? (
-          <Image
-            src={logo.url}
-            alt={brand}
-            width={logo.width}
-            height={logo.height}
-            className="h-7 w-auto object-contain md:h-8"
-            priority
-            unoptimized={logo.mime === "image/svg+xml"}
-          />
-        ) : (
-          <a
-            href="#home"
-            className="text-lg font-bold text-[#ed7d24] uppercase"
-          >
-            {brand}
-          </a>
-        )}
-
-        <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white lg:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-          <span aria-hidden className="flex flex-col gap-1.5">
-            <span
-              className={`block h-px w-4 bg-current transition ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
-            />
-            <span
-              className={`block h-px w-4 bg-current transition ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block h-px w-4 bg-current transition ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
-            />
-          </span>
-        </button>
-      </nav>
-
-      {menuOpen ? (
+    <div ref={rootRef} className={`relative w-full ${className}`.trim()}>
+      {/* Video + nav + heading share a fixed one-screen box so the panel below
+          (which grows with copy length) can never cover the heading -- it sits
+          in normal flow beneath this box instead of overlaying it. */}
+      <div className="relative h-svh w-full overflow-hidden bg-[#0b1d36]">
+        {/* src on the element, not a typed <source>: the CMS serves whatever mime
+            was uploaded and a wrong `type` makes the browser skip the file. */}
+        <video
+          key={videoUrl}
+          src={videoUrl}
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden
+        />
         <div
-          id="mobile-nav"
-          className="pointer-events-auto absolute inset-x-0 top-[4.75rem] z-20 mx-6 rounded-lg border border-white/10 bg-[#0b1d36]/95 p-6 shadow-2xl backdrop-blur-xl md:mx-10 lg:hidden"
-        >
-          <ul className="flex flex-col gap-4 text-sm text-white/80">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,29,54,0.42)_0%,rgba(11,29,54,0.22)_45%,rgba(11,29,54,0.88)_100%)]"
+          aria-hidden
+        />
+
+        <header className="pointer-events-none absolute inset-0 z-10 flex h-full flex-col">
+          <nav className="pointer-events-auto flex items-center justify-between px-6 py-6 md:px-10 md:py-8 lg:px-14 xl:px-20">
+            {logo ? (
+              <Image
+                src={logo.url}
+                alt={brand}
+                width={logo.width}
+                height={logo.height}
+                className="h-7 w-auto object-contain md:h-8"
+                priority
+                unoptimized={logo.mime === "image/svg+xml"}
+              />
+            ) : (
+              <a
+                href="#home"
+                className="text-lg font-bold text-[#ed7d24] uppercase"
+              >
+                {brand}
+              </a>
+            )}
+
+            <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
+              {NAV_LINKS.map((link) => (
                 <a
+                  key={link.href}
                   href={link.href}
-                  className="block py-1 transition-colors hover:text-white"
-                  onClick={() => setMenuOpen(false)}
+                  className="transition-colors hover:text-white"
                 >
                   {link.label}
                 </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+              ))}
+            </div>
 
-      <div className="relative flex flex-1 flex-col px-6 pt-10 pb-48 md:px-10 md:pt-14 md:pb-56 lg:px-14 xl:px-20">
-        <div className="mt-6 max-w-3xl md:mt-10 lg:mt-14">
-          <h1
-            className={`${playfair.className} text-5xl leading-[1.03] font-medium tracking-tight text-white md:text-6xl lg:text-7xl xl:text-[5.75rem]`}
-          >
-            {lines.map((line, index) => (
-              <span
-                key={`${line.text}-${index}`}
-                ref={(el) => {
-                  headingLineRefs.current[index] = el;
-                }}
-                className="block opacity-0"
-                style={{ color: line.color }}
-              >
-                {line.text}
+            <button
+              type="button"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white lg:hidden"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+              <span aria-hidden className="flex flex-col gap-1.5">
+                <span
+                  className={`block h-px w-4 bg-current transition ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
+                />
+                <span
+                  className={`block h-px w-4 bg-current transition ${menuOpen ? "opacity-0" : ""}`}
+                />
+                <span
+                  className={`block h-px w-4 bg-current transition ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
+                />
               </span>
-            ))}
-          </h1>
-        </div>
+            </button>
+          </nav>
+
+          {menuOpen ? (
+            <div
+              id="mobile-nav"
+              className="pointer-events-auto absolute inset-x-0 top-[4.75rem] z-20 mx-6 rounded-lg border border-white/10 bg-[#0b1d36]/95 p-6 shadow-2xl backdrop-blur-xl md:mx-10 lg:hidden"
+            >
+              <ul className="flex flex-col gap-4 text-sm text-white/80">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="block py-1 transition-colors hover:text-white"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          <div className="relative flex flex-1 flex-col px-6 pt-10 pb-10 md:px-10 md:pt-14 md:pb-56 lg:px-14 xl:px-20">
+            <div className="mt-6 max-w-3xl md:mt-10 lg:mt-14">
+              <h1
+                className={`${playfair.className} text-5xl leading-[1.03] font-medium tracking-tight text-white md:text-6xl lg:text-7xl xl:text-[5.75rem]`}
+              >
+                {lines.map((line, index) => (
+                  <span
+                    key={`${line.text}-${index}`}
+                    ref={(el) => {
+                      headingLineRefs.current[index] = el;
+                    }}
+                    className="block opacity-0"
+                    style={{ color: line.color }}
+                  >
+                    {line.text}
+                  </span>
+                ))}
+              </h1>
+            </div>
+          </div>
+        </header>
       </div>
 
+      {/* In flow (and scrollable) on mobile so it never overlaps the heading
+          above; pinned to the bottom of the video box from md up, where its
+          height comfortably fits within the one-screen hero. */}
       <div
         ref={panelRef}
-        className="pointer-events-auto absolute inset-x-0 bottom-0 border-y border-white/10 bg-[#0b1d36]/40 px-6 py-8 text-white opacity-0 shadow-2xl shadow-black/25 backdrop-blur-xl md:px-10 md:py-10 lg:px-14 xl:px-20"
+        className="relative border-y border-white/10 bg-[#0b1d36]/40 px-6 py-8 text-white opacity-0 shadow-2xl shadow-black/25 backdrop-blur-xl md:absolute md:inset-x-0 md:bottom-0 md:px-10 md:py-10 lg:px-14 xl:px-20"
       >
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col gap-4 text-base leading-relaxed text-white/85 md:w-3/4 md:text-lg md:leading-8">
@@ -198,6 +222,6 @@ export default function HeroOverlay({
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
