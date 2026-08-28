@@ -108,7 +108,7 @@ export default function HeroOverlay({
                 alt={brand}
                 width={logo.width}
                 height={logo.height}
-                className="h-7 w-auto object-contain md:h-8"
+                className="h-10 w-auto object-contain md:h-12"
                 priority
                 unoptimized={logo.mime === "image/svg+xml"}
               />

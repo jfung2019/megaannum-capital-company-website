@@ -115,7 +115,7 @@ export default function ContactSection({
               ))}
             </ul>
 
-            <form
+            {/* <form
               className="mt-12 space-y-5 text-left"
               onSubmit={(e) => e.preventDefault()}
               noValidate
@@ -171,7 +171,7 @@ export default function ContactSection({
               >
                 {form.submitLabel}
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>

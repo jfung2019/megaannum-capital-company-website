@@ -3,12 +3,25 @@
 import { useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
-import { Atom, Bot, Cpu, Server, Zap, type LucideIcon } from "lucide-react";
+import {
+  Atom,
+  Bot,
+  Cpu,
+  Factory,
+  Globe,
+  LayoutGrid,
+  Microscope,
+  Route,
+  Server,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
 import {
   STRATEGIES_CONTENT,
   type SectorIcon,
+  type StrategyIcon,
   type StrategiesContent,
 } from "./strategies/strategies.config";
 
@@ -23,6 +36,14 @@ const SECTOR_ICONS: Record<SectorIcon, LucideIcon> = {
   energy: Zap,
   semiconductors: Server,
   frontier: Atom,
+};
+
+const STRATEGY_ICONS: Record<StrategyIcon, LucideIcon> = {
+  pipeline: Microscope,
+  industrial: Factory,
+  "cross-border": Globe,
+  sectors: LayoutGrid,
+  exit: Route,
 };
 
 type StrategiesSectionProps = {
@@ -125,18 +146,22 @@ export default function StrategiesSection({
         </header>
 
         <ul className="mt-16 border-t border-black/10 md:mt-20">
-          {items.map((item) =>
-            item.type === "row" ? (
+          {items.map((item) => {
+            const Icon = STRATEGY_ICONS[item.icon];
+            return item.type === "row" ? (
               <li
                 key={item.id}
                 data-strategy-row
                 className="grid gap-4 border-b border-black/10 py-10 opacity-0 md:grid-cols-[minmax(0,16rem)_1fr] md:gap-10 md:py-12 lg:grid-cols-[minmax(0,18rem)_1fr]"
               >
-                <h3
-                  className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
-                >
-                  {item.heading}
-                </h3>
+                <div>
+                  <Icon size={24} strokeWidth={1.5} className="text-[#ed7d24]" aria-hidden />
+                  <h3
+                    className={`${playfair.className} mt-3 text-2xl font-medium tracking-tight md:text-[1.75rem]`}
+                  >
+                    {item.heading}
+                  </h3>
+                </div>
                 <div className="space-y-4 text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
                   {item.body.split("\n\n").map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
@@ -149,8 +174,9 @@ export default function StrategiesSection({
                 data-strategy-row
                 className="border-b border-black/10 py-10 opacity-0 md:py-12"
               >
+                <Icon size={24} strokeWidth={1.5} className="text-[#ed7d24]" aria-hidden />
                 <h3
-                  className={`${playfair.className} text-2xl font-medium tracking-tight md:text-[1.75rem]`}
+                  className={`${playfair.className} mt-3 text-2xl font-medium tracking-tight md:text-[1.75rem]`}
                 >
                   {item.heading}
                 </h3>
@@ -161,13 +187,13 @@ export default function StrategiesSection({
 
                 <div className="mt-6 grid grid-cols-1 border-t border-l border-black/10 sm:grid-cols-2 lg:grid-cols-5">
                   {item.sectors.map((sector) => {
-                    const Icon = SECTOR_ICONS[sector.icon];
+                    const SectorGlyph = SECTOR_ICONS[sector.icon];
                     return (
                       <div
                         key={sector.id}
                         className="border-r border-b border-black/10 p-6"
                       >
-                        <Icon
+                        <SectorGlyph
                           size={22}
                           strokeWidth={1.5}
                           className="text-[#ed7d24]"
@@ -186,8 +212,8 @@ export default function StrategiesSection({
                   })}
                 </div>
               </li>
-            ),
-          )}
+            );
+          })}
         </ul>
       </div>
     </section>

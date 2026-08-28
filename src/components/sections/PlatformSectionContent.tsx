@@ -10,6 +10,7 @@ import {
   PLATFORM_CONTENT,
   type PlatformContent,
 } from "./platform/platform.config";
+import SkylineCarousel from "./platform/SkylineCarousel";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -126,6 +127,10 @@ export default function PlatformSectionContent({
           </div>
         </div>
 
+        <div className="mx-auto mt-14 max-w-6xl md:mt-16 lg:mt-20">
+          <SkylineCarousel />
+        </div>
+
         <dl
           ref={statsRef}
           className="mx-auto mt-14 grid max-w-4xl gap-12 text-center md:mt-16 md:grid-cols-3 md:gap-8 lg:mt-20 lg:gap-12"
@@ -138,7 +143,7 @@ export default function PlatformSectionContent({
               <dt className="sr-only">{stat.label}</dt>
               <dd
                 data-stat-value
-                className={`${playfair.className} text-4xl font-medium tracking-tight text-white md:text-5xl lg:text-[3.25rem] lg:leading-none`}
+                className={`${playfair.className} text-6xl font-semibold tracking-tight text-white md:text-7xl lg:text-[5rem] lg:leading-none`}
               >
                 {formatPlatformStatValue(stat.value, stat)}
               </dd>

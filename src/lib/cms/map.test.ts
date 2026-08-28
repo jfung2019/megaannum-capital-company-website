@@ -179,11 +179,11 @@ describe("falling back to the bundled configs", () => {
     );
   });
 
-  it("leaves the logo null when the CMS has none, so the wordmark shows instead", () => {
+  it("keeps the bundled logo when the CMS has none", () => {
     // next/image rejects an empty src, and the nav must not render blank.
-    expect(heroContent({ landing: { logo: null } }).logo).toBeNull();
+    expect(heroContent({ landing: { logo: null } }).logo).toEqual(HERO_CONTENT.logo);
     // An ImageRef missing its dimensions is unusable too.
-    expect(heroContent({ landing: { logo: { id: "x" } } }).logo).toBeNull();
+    expect(heroContent({ landing: { logo: { id: "x" } } }).logo).toEqual(HERO_CONTENT.logo);
   });
 
   it("treats a blank heading as absent, so pre-migration documents still read well", () => {
