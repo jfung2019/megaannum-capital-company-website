@@ -38,19 +38,16 @@ export const PLATFORM_CONTENT: PlatformContent = {
     {
       value: 5,
       from: 0,
-      prefix: "0",
       label: "Core sectors",
     },
     {
       value: 3,
       from: 0,
-      prefix: "0",
       label: "Strategic partnerships",
     },
     {
       value: 4,
       from: 0,
-      prefix: "0",
       label: "Exit pathways",
     },
   ],

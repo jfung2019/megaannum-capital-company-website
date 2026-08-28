@@ -7,11 +7,19 @@ export type Sector = {
   body: string;
 };
 
+export type StrategyIcon =
+  | "pipeline"
+  | "industrial"
+  | "cross-border"
+  | "sectors"
+  | "exit";
+
 export type Strategy =
-  | { type: "row"; id: string; heading: string; body: string }
+  | { type: "row"; id: string; icon: StrategyIcon; heading: string; body: string }
   | {
       type: "grid";
       id: string;
+      icon: StrategyIcon;
       heading: string;
       intro: string;
       lead: string;
@@ -34,24 +42,28 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
     {
       type: "row",
       id: "proprietary-pipeline",
+      icon: "pipeline",
       heading: "Proprietary technology pipeline",
       body: "The firm maintains a strategic partnership with the Chinese Academy of Sciences ecosystem. This relationship provides direct access to commercially viable projects emerging from China’s leading research institutions in fields such as artificial intelligence, semiconductors, advanced materials, robotics and new energy. Through this unique channel, we are able to conduct commercial screening and value discovery on high-quality deep technology assets before they enter the public markets.",
     },
     {
       type: "row",
       id: "industrial-ecosystem-integration",
+      icon: "industrial",
       heading: "Deep industrial ecosystem integration",
       body: "The firm has established a comprehensive strategic partnership with Shanghai Electric Group. Shanghai Electric is a globally leading provider of industrial grade green and intelligent system solutions. Its core businesses span three major segments including energy equipment, industrial equipment and integrated services. The group holds deep industrial capabilities in new energy equipment, energy storage, industrial automation and robotics. This partnership enables us to participate in investment opportunities across China’s advanced manufacturing and energy transition sectors while leveraging Shanghai Electric’s industrial resources to provide operational support to portfolio companies.\n\nThe firm has also established a strategic partnership with a Hong Kong listed company. This company is a leading provider of mobile communication transmission solutions in China, serving the country’s major telecommunications operators. Its products have successfully entered the core supply chain of globally leading storage enterprises. Through this partnership, we are able to identify distinctive investment opportunities in communication infrastructure, AIDC smart computing centres and millimetre wave technologies.",
     },
     {
       type: "row",
       id: "cross-border",
+      icon: "cross-border",
       heading: "Cross-border capital access",
       body: "Operating out of Hong Kong, the firm has built a cross-border capital network that spans China, the Middle East and other emerging markets. We help Chinese technology companies expand into overseas markets while also providing international capital with professional access to China’s deep technology sector. This two-way capability positions us uniquely within the broader trends of cross border technology transfer and industrial global expansion.",
     },
     {
       type: "grid",
       id: "sector-coverage",
+      icon: "sectors",
       heading: "Multi-sector coverage",
       intro:
         "The firm’s investment mandate covers multiple high growth technology sectors. We focus not only on leading projects within individual sectors but also on cross sector synergies and technological convergence, identifying structural investment opportunities at the intersection of different industries.",
@@ -92,6 +104,7 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
     {
       type: "row",
       id: "exit-pathways",
+      icon: "exit",
       heading: "Exit pathways",
       body: "Hong Kong’s standing as an international capital market, plus our relationships with listed companies across the A-share and Hong Kong markets, gives portfolio companies options: IPO on HKEX or the A-share markets, industrial M&A, strategic sale, and cross-border equity transfer.",
     },

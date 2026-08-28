@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
 
@@ -100,30 +101,45 @@ export default function WorkingHereSection({
           </p>
         </header>
 
-        <div className="mt-16 grid gap-12 border-t border-white/10 pt-14 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-14">
-          {pillars.map((pillar) => (
-            <article key={pillar.id}>
-              <p className="font-mono text-[11px] tracking-[0.22em] text-[#ed7d24] uppercase">
-                {pillar.eyebrow}
-              </p>
-              <h3
-                className={`${playfair.className} mt-4 text-2xl font-medium tracking-tight md:text-[1.65rem]`}
-              >
-                {pillar.heading}
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-white/65 md:leading-8">
-                {pillar.body}
-              </p>
-            </article>
-          ))}
-        </div>
+        <div className="mt-16 grid gap-12 border-t border-white/10 pt-14 md:mt-20 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl md:aspect-auto md:h-full">
+            <Image
+              src="/images/working_here.png"
+              alt="The Megaannum Capital team collaborating around a laptop"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
 
-        <a
-          href={cta.href}
-          className="mt-14 inline-flex items-center justify-center rounded-full bg-[#ed7d24] px-8 py-3.5 text-sm font-medium text-white transition hover:bg-[#d66e1a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed7d24] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b1d36]"
-        >
-          {cta.label}
-        </a>
+          <div className="flex flex-col">
+            {pillars.map((pillar, index) => (
+              <article
+                key={pillar.id}
+                className={index > 0 ? "mt-10 border-t border-white/10 pt-10" : ""}
+              >
+                <p className="font-mono text-[11px] tracking-[0.22em] text-[#ed7d24] uppercase">
+                  {pillar.eyebrow}
+                </p>
+                <h3
+                  className={`${playfair.className} mt-4 text-2xl font-medium tracking-tight md:text-[1.65rem]`}
+                >
+                  {pillar.heading}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-white/65 md:leading-8">
+                  {pillar.body}
+                </p>
+              </article>
+            ))}
+
+            <a
+              href={cta.href}
+              className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-[#ed7d24] px-8 py-3.5 text-sm font-medium text-white transition hover:bg-[#d66e1a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed7d24] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b1d36]"
+            >
+              {cta.label}
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
