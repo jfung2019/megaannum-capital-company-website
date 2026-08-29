@@ -98,19 +98,29 @@ export function parseStat(value: string, label: string): PlatformStat | null {
 
 export function heroContent(raw: unknown): HeroContent {
   const landing = obj(obj(raw).landing);
+  const [firstSlide, ...restSlides] = HERO_CONTENT.slides;
   const lines = rows(landing.lines)
     ?.map((l, i) => ({
       text: str(l.text, ""),
-      color: str(l.color, HERO_CONTENT.headingLines[i]?.color ?? "#ffffff"),
+      color: str(l.color, firstSlide.headingLines[i]?.color ?? "#ffffff"),
     }))
     .filter((l) => l.text);
   return {
     logo: imageUrl(landing.logo) ?? HERO_CONTENT.logo,
     brand: HERO_CONTENT.brand,
-    headingLines: lines?.length ? lines : HERO_CONTENT.headingLines,
+    // Only the first slide has a CMS source; later slides (e.g. the mission
+    // statement) are bundled only, so a published document still gets a
+    // multi-slide carousel rather than losing every slide but the first.
+    slides: [
+      {
+        ...firstSlide,
+        headingLines: lines?.length ? lines : firstSlide.headingLines,
+        // Same media route as an image; only the url is of any use to a <video>.
+        videoUrl: imageUrl(landing.heroVideo)?.url ?? firstSlide.videoUrl,
+      },
+      ...restSlides,
+    ],
     body: str(landing.lower, HERO_CONTENT.body),
-    // Same media route as an image; only the url is of any use to a <video>.
-    videoUrl: imageUrl(landing.heroVideo)?.url ?? HERO_CONTENT.videoUrl,
     cta: HERO_CONTENT.cta,
   };
 }

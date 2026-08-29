@@ -11,6 +11,7 @@ import {
   type PlatformContent,
 } from "./platform/platform.config";
 import SkylineCarousel from "./platform/SkylineCarousel";
+import BridgeDiagram from "./platform/BridgeDiagram";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -100,18 +101,24 @@ export default function PlatformSectionContent({
       className={`flex min-h-svh w-full flex-col justify-center text-white ${className}`.trim()}
     >
       <div className="w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20">
-        <div className="mx-auto flex max-w-6xl flex-col items-center border-b border-white/25 pb-14 text-center md:pb-16 lg:pb-20">
-          <h2
-            id="approach-heading"
-            className={`${playfair.className} text-[2.35rem] leading-[1.12] font-medium tracking-tight text-white md:text-5xl md:leading-[1.1] lg:text-[3.35rem] lg:leading-[1.08]`}
-          >
-            {/* ponytail: one string, wrapped by the max-w above. Split on "
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col items-center text-center">
+            <h2
+              id="approach-heading"
+              className={`${playfair.className} text-[2.35rem] leading-[1.12] font-medium tracking-tight text-white md:text-5xl md:leading-[1.1] lg:text-[3.35rem] lg:leading-[1.08]`}
+            >
+              {/* ponytail: one string, wrapped by the max-w above. Split on "
 "
-                if an editor ever needs to control where the line breaks. */}
-            {headline}
-          </h2>
+                  if an editor ever needs to control where the line breaks. */}
+              {headline}
+            </h2>
 
-          <div className="mt-8 max-w-5xl space-y-8 text-base leading-relaxed text-white/85 md:mt-10 md:text-[1.05rem] md:leading-8">
+            <div className="mt-12 md:mt-14 lg:mt-16">
+              <BridgeDiagram />
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-x-10 gap-y-8 border-t border-white/25 pt-12 text-base leading-relaxed text-white/85 sm:grid-cols-2 md:mt-14 md:pt-14 md:text-[1.05rem] md:leading-8 lg:mt-16 lg:pt-16">
             {intro.split("\n\n").map((paragraph, index) => (
               <div key={index}>
                 {introHeadings[index] ? (

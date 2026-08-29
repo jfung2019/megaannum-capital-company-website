@@ -11,14 +11,26 @@ export type NavLink = {
   label: string;
 };
 
+export type HeroSlide = {
+  id: string;
+  /** Background clip. The CMS upload overrides the first slide's, else the bundled clip. */
+  videoUrl: string;
+  /** Small label above the heading lines, e.g. "Our Mission". Omit for none. */
+  eyebrow?: string;
+  headingLines: HeroHeadingLine[];
+};
+
 export type HeroContent = {
   /** Brand mark. A published CMS logo overrides the bundled crest below. */
   logo: CmsImage | null;
   brand: string;
-  headingLines: HeroHeadingLine[];
+  /**
+   * The hero carousel. Only the first slide's video/heading has a CMS
+   * source -- later slides (e.g. the mission statement) are bundled only,
+   * so a published document can't leave the carousel with just one slide.
+   */
+  slides: HeroSlide[];
   body: string;
-  /** Background clip. The CMS upload when there is one, else the stock clip. */
-  videoUrl: string;
   cta: {
     label: string;
     href: string;
@@ -30,8 +42,6 @@ export const NAV_LINKS: NavLink[] = [
   { href: "#mission", label: "Mission" },
   { href: "#approach", label: "Approach" },
   { href: "#platform", label: "Platform" },
-  { href: "#working-here", label: "Working Here" },
-  { href: "#news", label: "News" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -43,14 +53,30 @@ export const HERO_CONTENT: HeroContent = {
     mime: "image/png",
   },
   brand: "Megaannum Capital Limited",
-  headingLines: [
-    { text: "Chinese", color: "#ffffff" },
-    { text: "Deep Technology", color: "#ed7d24" },
-    { text: "Global Capital", color: "#ffffff" },
+  slides: [
+    {
+      id: "bridge",
+      videoUrl: "/videos/mgcap1.mp4",
+      headingLines: [
+        { text: "Chinese", color: "#ffffff" },
+        { text: "Deep Technology", color: "#ed7d24" },
+        { text: "Global Capital", color: "#ffffff" },
+      ],
+    },
+    {
+      id: "mission",
+      videoUrl: "/videos/mgcap4.mp4",
+      eyebrow: "Our Mission",
+      headingLines: [
+        {
+          text: "Investing in and building world-class technology companies",
+          color: "#ffffff",
+        },
+      ],
+    },
   ],
   body:
     "Megaannum Capital is a Hong Kong based private equity firm focused on growth stage and pre-IPO investments in the technology sector. The firm provides professional cross border investment management services to institutional investors, family offices and industrial capital worldwide.\n\nThe firm maintains deep roots in China’s industrial and technology ecosystem while having established an extensive capital network across the Middle East, Southeast Asia and other emerging markets. Operating out of Hong Kong, we serve as a bridge connecting Chinese deep technology with global capital. Our competitive advantages are built on cross border technology transfer, industrial global expansion and co investment capabilities.",
-  videoUrl: "/videos/mgcap1.mp4",
   cta: {
     label: "Speak with us",
     href: "#contact",

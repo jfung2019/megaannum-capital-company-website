@@ -4,8 +4,6 @@ import MissionSection from "@/components/sections/MissionSection";
 import PlatformSection from "@/components/sections/PlatformSection";
 import StrategiesSection from "@/components/sections/StrategiesSection";
 import ContactSection from "@/components/sections/ContactSection";
-import WorkingHereSection from "@/components/sections/WorkingHereSection";
-import NewsSection from "@/components/sections/NewsSection";
 import { getSiteContent } from "@/lib/cms/client";
 import {
   contactContent,
@@ -28,8 +26,6 @@ export default async function HomePage() {
       <PlatformSection content={platformContent(cms)} />
       <div data-page-continuation className="relative z-10">
         <StrategiesSection />
-        <WorkingHereSection />
-        <NewsSection />
         <ContactSection content={contactContent(cms)} />
         <Footer />
       </div>

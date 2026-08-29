@@ -95,12 +95,18 @@ describe("mapping a published payload", () => {
         mime: "image/png",
       },
       brand: HERO_CONTENT.brand,
-      headingLines: [
-        { text: "Published", color: "#ffffff" },
-        { text: "Headline", color: "#EC721A" },
+      slides: [
+        {
+          ...HERO_CONTENT.slides[0],
+          headingLines: [
+            { text: "Published", color: "#ffffff" },
+            { text: "Headline", color: "#EC721A" },
+          ],
+          videoUrl: `${BASE}/content/images/hero-1`,
+        },
+        ...HERO_CONTENT.slides.slice(1),
       ],
       body: "CMS body copy.",
-      videoUrl: `${BASE}/content/images/hero-1`,
       cta: HERO_CONTENT.cta,
     });
 
@@ -173,9 +179,11 @@ describe("falling back to the bundled configs", () => {
   it("keeps the bundled clip when the CMS has no hero video", () => {
     // The hero must never render a blank <video>, and documents published before
     // the field existed have no heroVideo at all.
-    expect(heroContent({ landing: { logo: null } }).videoUrl).toBe(HERO_CONTENT.videoUrl);
-    expect(heroContent({ landing: { heroVideo: { id: "x" } } }).videoUrl).toBe(
-      HERO_CONTENT.videoUrl,
+    expect(heroContent({ landing: { logo: null } }).slides[0].videoUrl).toBe(
+      HERO_CONTENT.slides[0].videoUrl,
+    );
+    expect(heroContent({ landing: { heroVideo: { id: "x" } } }).slides[0].videoUrl).toBe(
+      HERO_CONTENT.slides[0].videoUrl,
     );
   });
 
