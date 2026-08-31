@@ -104,7 +104,7 @@ export default function ContactSection({
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="mt-1 inline-block text-base text-white underline-offset-4 transition hover:text-[#ed7d24] hover:underline"
+                      className="mt-1 inline-block text-base text-white underline-offset-4 transition-colors duration-150 ease-out hover:text-[#ed7d24] hover:underline"
                     >
                       {item.value}
                     </a>

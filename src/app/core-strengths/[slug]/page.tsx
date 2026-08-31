@@ -38,7 +38,7 @@ export default async function CoreStrengthPage({ params }: PageProps) {
     <>
       <Link
         href="/#platform"
-        className="font-mono text-[11px] tracking-[0.2em] text-black/45 uppercase transition hover:text-[#ed7d24]"
+        className="font-mono text-[11px] tracking-[0.2em] text-black/45 uppercase transition-colors duration-150 ease-out hover:text-[#ed7d24]"
       >
         &larr; Core strengths
       </Link>
@@ -58,7 +58,7 @@ export default async function CoreStrengthPage({ params }: PageProps) {
       <p className="text-sm text-black/50">Discuss this with our team.</p>
       <Link
         href="/#contact"
-        className="inline-flex w-fit items-center justify-center rounded-full bg-[#ed7d24] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#d66e1a]"
+        className="inline-flex w-fit items-center justify-center rounded-full bg-[#ed7d24] px-7 py-3 text-sm font-medium text-white transition-[background-color,transform] duration-150 ease-out hover:bg-[#d66e1a] active:scale-[0.97]"
       >
         Speak with us
       </Link>

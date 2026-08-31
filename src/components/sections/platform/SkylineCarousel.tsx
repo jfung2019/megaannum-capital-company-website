@@ -97,7 +97,7 @@ export default function SkylineCarousel() {
               onClick={() => setActive(index)}
               aria-label={`Show ${slide.city}`}
               aria-current={index === active}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                 index === active ? "w-6 bg-[#ed7d24]" : "w-1.5 bg-white/40 hover:bg-white/60"
               }`}
             />

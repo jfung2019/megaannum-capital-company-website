@@ -173,7 +173,7 @@ export default function HeroOverlay({
           <video
             key={s.id}
             src={s.videoUrl}
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out"
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
             style={{ opacity: index === activeSlide ? 1 : 0 }}
             autoPlay
             muted
@@ -232,7 +232,7 @@ export default function HeroOverlay({
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-out active:scale-90 lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               onClick={() => setMenuOpen((open) => !open)}
@@ -240,38 +240,45 @@ export default function HeroOverlay({
               <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
               <span aria-hidden className="flex flex-col gap-1.5">
                 <span
-                  className={`block h-px w-4 bg-current transition ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
                 />
                 <span
-                  className={`block h-px w-4 bg-current transition ${menuOpen ? "opacity-0" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "opacity-0" : ""}`}
                 />
                 <span
-                  className={`block h-px w-4 bg-current transition ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
                 />
               </span>
             </button>
           </nav>
 
-          {menuOpen ? (
-            <div
-              id="mobile-nav"
-              className="pointer-events-auto absolute inset-x-0 top-[4.75rem] z-20 mx-6 rounded-lg border border-white/10 bg-[#0b1d36]/95 p-6 shadow-2xl backdrop-blur-xl md:mx-10 lg:hidden"
-            >
-              <ul className="flex flex-col gap-4 text-sm text-white/80">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="block py-1 transition-colors hover:text-white"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
+          {/* Always mounted (rather than conditionally rendered) so both the
+              entrance and the exit can transition -- popping the menu in and
+              out with no transition at all reads as broken. Scales in from
+              the trigger's corner, not center, and starts from 0.95 rather
+              than 0 (nothing in the real world appears from nothing). */}
+          <div
+            id="mobile-nav"
+            className={`absolute inset-x-0 top-[4.75rem] z-20 mx-6 origin-top-right rounded-lg border border-white/10 bg-[#0b1d36]/95 p-6 shadow-2xl backdrop-blur-xl transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] md:mx-10 lg:hidden ${
+              menuOpen ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
+            }`}
+            aria-hidden={!menuOpen}
+          >
+            <ul className="flex flex-col gap-4 text-sm text-white/80">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    tabIndex={menuOpen ? 0 : -1}
+                    className="block py-1 transition-colors duration-150 ease-out hover:text-white"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div className="relative flex flex-1 flex-col px-6 pt-10 pb-10 md:px-10 md:pt-14 md:pb-56 lg:px-14 xl:px-20">
             <div className="mt-6 max-w-3xl md:mt-10 lg:mt-14">
@@ -308,7 +315,7 @@ export default function HeroOverlay({
                     onClick={() => goToSlide(index)}
                     aria-label={`Show slide ${index + 1}`}
                     aria-current={index === activeSlide}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                    className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                       index === activeSlide
                         ? "w-8 bg-[#ed7d24]"
                         : "w-4 bg-white/35 hover:bg-white/55"

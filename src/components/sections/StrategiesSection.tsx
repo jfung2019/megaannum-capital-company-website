@@ -119,7 +119,7 @@ export default function StrategiesSection({
               key={item.id}
               href={`/core-strengths/${item.id}`}
               data-strategy-card
-              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white opacity-0 transition hover:border-black/20 hover:shadow-lg"
+              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.99]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
@@ -127,7 +127,7 @@ export default function StrategiesSection({
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between gap-3 p-5">
