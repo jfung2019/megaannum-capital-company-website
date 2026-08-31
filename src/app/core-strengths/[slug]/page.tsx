@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
+import { ArrowRight } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
@@ -38,7 +39,7 @@ export default async function CoreStrengthPage({ params }: PageProps) {
     <>
       <Link
         href="/#platform"
-        className="font-mono text-[11px] tracking-[0.2em] text-black/45 uppercase transition hover:text-[#ed7d24]"
+        className="font-mono text-[11px] tracking-[0.2em] text-black/45 uppercase transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#ed7d24]"
       >
         &larr; Core strengths
       </Link>
@@ -58,9 +59,15 @@ export default async function CoreStrengthPage({ params }: PageProps) {
       <p className="text-sm text-black/50">Discuss this with our team.</p>
       <Link
         href="/#contact"
-        className="inline-flex w-fit items-center justify-center rounded-full bg-[#ed7d24] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#d66e1a]"
+        className="group inline-flex w-fit items-center justify-center gap-2 rounded-full bg-[#ed7d24] px-7 py-3 text-sm font-medium text-white transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#d66e1a] active:scale-[0.97]"
       >
         Speak with us
+        <ArrowRight
+          size={16}
+          strokeWidth={2}
+          className="transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
+          aria-hidden
+        />
       </Link>
     </div>
   );

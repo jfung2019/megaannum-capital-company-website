@@ -11,6 +11,11 @@
   --cream: #f6f3ec;
   --ink: #1a1714;
   --surface: #0f172a;
+
+  /* Stronger than the browser's built-in easings, which read as weak/floaty
+     on UI-scale motion (dropdowns, cards, buttons). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @theme inline {
@@ -41,4 +46,15 @@ body {
 ::selection {
   background: rgba(237, 125, 36, 0.35);
   color: #fff;
+}
+
+/* Hero slide carousel: the active indicator fills over the slide's dwell
+   time so it doubles as an autoplay countdown, not just a position marker. */
+@keyframes hero-progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
