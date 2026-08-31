@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
+import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
@@ -119,7 +120,7 @@ export default function StrategiesSection({
               key={item.id}
               href={`/core-strengths/${item.id}`}
               data-strategy-card
-              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.99]"
+              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.98]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
@@ -127,18 +128,23 @@ export default function StrategiesSection({
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
+                  className="object-cover transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
                 />
               </div>
-              <div className="flex flex-1 flex-col justify-between gap-3 p-5">
-                <h3
-                  className={`${playfair.className} text-lg leading-snug font-medium tracking-tight`}
-                >
-                  {item.heading}
-                </h3>
-                <span className="font-mono text-[11px] tracking-[0.14em] text-[#ed7d24] uppercase">
-                  Learn more &rarr;
-                </span>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <h3
+                    className={`${playfair.className} text-lg leading-snug font-medium tracking-tight`}
+                  >
+                    {item.heading}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ed7d24]/30 text-[#ed7d24] transition-[background-color,border-color,color,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:border-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-white"
+                  >
+                    <ArrowUpRight size={16} strokeWidth={2} />
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

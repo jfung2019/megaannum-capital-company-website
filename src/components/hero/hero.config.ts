@@ -66,7 +66,6 @@ export const HERO_CONTENT: HeroContent = {
     {
       id: "mission",
       videoUrl: "/videos/mgcap4.mp4",
-      eyebrow: "Our Mission",
       headingLines: [
         {
           text: "Investing in and building world-class technology companies",

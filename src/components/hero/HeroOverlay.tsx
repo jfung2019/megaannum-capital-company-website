@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
@@ -23,50 +23,37 @@ export default function HeroOverlay({
 }: HeroOverlayProps) {
   const { logo, brand, slides, body } = content;
   const rootRef = useRef<HTMLDivElement>(null);
-  const videoBoxRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const headingLineRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const slide = slides[activeSlide];
   const SLIDE_INTERVAL_MS = 7000;
 
-  // Whether the panel can pin to the bottom of the video box without its
-  // height reaching up into the heading. That's a measured fact, not a
-  // viewport breakpoint -- the same width can go either way depending on how
-  // much the copy wraps, and the heading's own height changes per slide.
-  // Defaults to false (the always-safe in-flow layout).
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  // Pinned as an overlay on desktop, always -- the panel was shortened
+  // specifically so it reliably fits without reaching the heading or the
+  // carousel dots, even on a short (non-fullscreen) desktop window. Below lg,
+  // there isn't room for an overlay at any content length, so it stays in
+  // normal flow as its own section beneath the video instead.
   const [pinPanel, setPinPanel] = useState(false);
 
-  useLayoutEffect(() => {
-    const videoBox = videoBoxRef.current;
-    const heading = headingRef.current;
-    const panel = panelRef.current;
-    if (!videoBox || !heading || !panel) return;
-
-    const SAFETY_MARGIN_PX = 32;
-    // Below lg, the panel always renders in flow as its own section beneath
-    // the video -- pinning it over the video on a short/narrow screen is what
-    // caused it to cover the slide's carousel dots.
+  useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1024px)");
-
-    const measure = () => {
-      if (!desktopQuery.matches) {
-        setPinPanel(false);
-        return;
-      }
-      const videoBottom = videoBox.getBoundingClientRect().bottom;
-      const headingBottom = heading.getBoundingClientRect().bottom;
-      const availableBelowHeading = videoBottom - headingBottom;
-      setPinPanel(panel.scrollHeight + SAFETY_MARGIN_PX <= availableBelowHeading);
-    };
-
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [body, activeSlide]);
+    const update = () => setPinPanel(desktopQuery.matches);
+    update();
+    desktopQuery.addEventListener("change", update);
+    return () => desktopQuery.removeEventListener("change", update);
+  }, []);
 
   // Panel entrance: once, on mount -- its content doesn't change per slide.
   useEffect(() => {
@@ -155,12 +142,7 @@ export default function HeroOverlay({
 
   return (
     <div ref={rootRef} className={`relative w-full ${className}`.trim()}>
-      {/* Video + nav + heading share a fixed one-screen box so the panel below
-          (which grows with copy length) can never cover the heading -- it sits
-          in normal flow beneath this box instead of overlaying it, unless
-          measured to actually fit pinned to the bottom. */}
       <div
-        ref={videoBoxRef}
         className="relative h-svh w-full overflow-hidden bg-[#0b1d36]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
@@ -223,7 +205,7 @@ export default function HeroOverlay({
                 <a
                   key={link.href}
                   href={link.href}
-                  className="transition-colors hover:text-white"
+                  className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -232,7 +214,7 @@ export default function HeroOverlay({
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-out active:scale-90 lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               onClick={() => setMenuOpen((open) => !open)}
@@ -240,13 +222,13 @@ export default function HeroOverlay({
               <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
               <span aria-hidden className="flex flex-col gap-1.5">
                 <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
                 />
                 <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "opacity-0" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "opacity-0" : ""}`}
                 />
                 <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-out ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
+                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
                 />
               </span>
             </button>
@@ -270,7 +252,7 @@ export default function HeroOverlay({
                   <a
                     href={link.href}
                     tabIndex={menuOpen ? 0 : -1}
-                    className="block py-1 transition-colors duration-150 ease-out hover:text-white"
+                    className="block py-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.label}
@@ -288,8 +270,7 @@ export default function HeroOverlay({
                 </p>
               ) : null}
               <h1
-                ref={headingRef}
-                className={`${playfair.className} text-5xl leading-[1.03] font-medium tracking-tight text-white md:text-6xl lg:text-7xl xl:text-[5.75rem]`}
+                className={`${playfair.className} text-5xl leading-[1.03] font-medium tracking-tight text-white md:text-6xl lg:text-6xl xl:text-7xl`}
               >
                 {slide.headingLines.map((line, index) => (
                   <span
@@ -309,18 +290,40 @@ export default function HeroOverlay({
             {slides.length > 1 ? (
               <div className="pointer-events-auto mt-10 flex gap-2 lg:mt-14">
                 {slides.map((s, index) => (
+                  // Extra vertical padding (with a matching negative margin)
+                  // makes the actual tap target a comfortable size without
+                  // growing the visible track -- the old dot's hit area was
+                  // just the bar itself, ~6px tall.
                   <button
                     key={s.id}
                     type="button"
                     onClick={() => goToSlide(index)}
                     aria-label={`Show slide ${index + 1}`}
                     aria-current={index === activeSlide}
-                    className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                      index === activeSlide
-                        ? "w-8 bg-[#ed7d24]"
-                        : "w-4 bg-white/35 hover:bg-white/55"
-                    }`}
-                  />
+                    className="-my-2.5 flex items-center py-2.5"
+                  >
+                    <span className="h-1.5 w-10 overflow-hidden rounded-full bg-white/25">
+                      {index === activeSlide && !reducedMotion ? (
+                        <span
+                          key={activeSlide}
+                          className="block h-full rounded-full bg-[#ed7d24]"
+                          style={{
+                            animationName: "hero-progress-fill",
+                            animationDuration: `${SLIDE_INTERVAL_MS}ms`,
+                            animationTimingFunction: "linear",
+                            animationFillMode: "forwards",
+                            animationPlayState: paused ? "paused" : "running",
+                          }}
+                        />
+                      ) : (
+                        <span
+                          className={`block h-full rounded-full transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                            index === activeSlide ? "w-full bg-[#ed7d24]" : "w-0 bg-white/55"
+                          }`}
+                        />
+                      )}
+                    </span>
+                  </button>
                 ))}
               </div>
             ) : null}
@@ -328,16 +331,16 @@ export default function HeroOverlay({
         </header>
       </div>
 
-      {/* In flow (and scrollable) on mobile, or whenever pinning would push
-          the panel up into the heading, so it never overlaps it; pinned to
-          the bottom of the video box only once measured to actually fit. */}
+      {/* Pinned as an overlay on desktop; in normal flow below the video on
+          mobile/tablet, where there's no room for an overlay regardless of
+          content length. */}
       <div
         ref={panelRef}
-        className={`border-y border-white/15 bg-[#0b1d36]/25 px-6 py-8 text-white opacity-0 shadow-2xl shadow-black/25 backdrop-blur-2xl backdrop-saturate-150 md:px-10 md:py-10 lg:px-14 xl:px-20 ${
+        className={`border-y border-white/20 bg-[#0b1d36]/20 px-6 py-8 text-white opacity-0 shadow-2xl shadow-black/25 backdrop-blur-3xl backdrop-saturate-200 md:px-10 md:py-7 lg:px-14 xl:px-20 ${
           pinPanel ? "absolute inset-x-0 bottom-0" : "relative"
         }`}
       >
-        <div className="flex flex-col gap-4 text-sm leading-relaxed text-white/85 md:text-base md:leading-7">
+        <div className="flex flex-col gap-4 text-sm leading-relaxed text-white/85 md:gap-3 md:text-[0.95rem] md:leading-[1.6]">
           {body.split("\n\n").map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}

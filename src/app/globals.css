@@ -47,3 +47,14 @@ body {
   background: rgba(237, 125, 36, 0.35);
   color: #fff;
 }
+
+/* Hero slide carousel: the active indicator fills over the slide's dwell
+   time so it doubles as an autoplay countdown, not just a position marker. */
+@keyframes hero-progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

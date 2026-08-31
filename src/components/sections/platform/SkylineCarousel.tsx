@@ -63,7 +63,7 @@ export default function SkylineCarousel() {
       {SLIDES.map((slide, index) => (
         <div
           key={slide.id}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          className="absolute inset-0 transition-opacity duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)]"
           style={{ opacity: index === active ? 1 : 0 }}
           aria-hidden={index !== active}
         >

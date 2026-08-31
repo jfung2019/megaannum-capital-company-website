@@ -46,7 +46,7 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
             <Link
               key={link.href}
               href={`/${link.href}`}
-              className="transition-colors hover:text-white"
+              className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
             >
               {link.label}
             </Link>
