@@ -6,11 +6,58 @@ import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
 
 import { HERO_CONTENT, NAV_LINKS, type HeroContent } from "./hero.config";
+import {
+  readConnection,
+  shouldLoadHeroVideo,
+} from "./shouldLoadHeroVideo";
+
+/** Give up on a clip that hasn't reached canplay -- common on congested
+ *  mainland links where the poster already filled the viewport. */
+const VIDEO_GIVE_UP_MS = 8000;
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
+
+type HeroSlideVideoProps = {
+  src: string;
+  ready: boolean;
+  onReady: () => void;
+  onGiveUp: () => void;
+};
+
+function HeroSlideVideo({ src, ready, onReady, onGiveUp }: HeroSlideVideoProps) {
+  const readyRef = useRef(false);
+  const onGiveUpRef = useRef(onGiveUp);
+  onGiveUpRef.current = onGiveUp;
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      if (!readyRef.current) onGiveUpRef.current();
+    }, VIDEO_GIVE_UP_MS);
+    return () => window.clearTimeout(timeout);
+  }, [src]);
+
+  return (
+    <video
+      src={src}
+      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+        ready ? "opacity-100" : "opacity-0"
+      }`}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      onCanPlay={() => {
+        readyRef.current = true;
+        onReady();
+      }}
+      onError={onGiveUp}
+    />
+  );
+}
 
 type HeroOverlayProps = {
   className?: string;
@@ -29,6 +76,16 @@ export default function HeroOverlay({
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [allowVideo, setAllowVideo] = useState(false);
+  const [mountedVideoIds, setMountedVideoIds] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [readyVideoIds, setReadyVideoIds] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [failedVideoIds, setFailedVideoIds] = useState<Set<string>>(
+    () => new Set(),
+  );
   const slide = slides[activeSlide];
   const SLIDE_INTERVAL_MS = 7000;
 
@@ -39,6 +96,35 @@ export default function HeroOverlay({
     query.addEventListener("change", update);
     return () => query.removeEventListener("change", update);
   }, []);
+
+  // Posters are the default view. Video is an upgrade after we know the
+  // link can carry it -- starting true would race both MP4s on first paint.
+  useEffect(() => {
+    const apply = () => {
+      setAllowVideo(shouldLoadHeroVideo(readConnection(), reducedMotion));
+    };
+    apply();
+    const connection = readConnection() as
+      | (ReturnType<typeof readConnection> & {
+          addEventListener?: (type: "change", listener: () => void) => void;
+          removeEventListener?: (type: "change", listener: () => void) => void;
+        })
+      | undefined;
+    connection?.addEventListener?.("change", apply);
+    return () => connection?.removeEventListener?.("change", apply);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (!allowVideo) return;
+    const id = slides[activeSlide]?.id;
+    if (!id || failedVideoIds.has(id)) return;
+    setMountedVideoIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }, [allowVideo, activeSlide, slides, failedVideoIds]);
 
   // Pinned as an overlay on desktop, always -- the panel was shortened
   // specifically so it reliably fits without reaching the heading or the
@@ -147,22 +233,56 @@ export default function HeroOverlay({
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/* All slides mounted and looping at once, crossfaded by opacity --
-            src stays on the element rather than a typed <source> since the
-            CMS serves whatever mime was uploaded, and a wrong `type` makes
-            the browser skip the file. */}
+        {/* Poster is the default view (and the LCP image). Video is layered
+            on top only after the connection looks able to carry it, and only
+            for slides the visitor has actually reached -- both MP4s at once
+            is what stalls a Beijing-class link. src stays on the element
+            rather than a typed <source> since the CMS serves whatever mime
+            was uploaded, and a wrong `type` makes the browser skip the file. */}
         {slides.map((s, index) => (
-          <video
+          <div
             key={s.id}
-            src={s.videoUrl}
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
+            className="absolute inset-0 transition-opacity duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
             style={{ opacity: index === activeSlide ? 1 : 0 }}
-            autoPlay
-            muted
-            loop
-            playsInline
             aria-hidden={index !== activeSlide}
-          />
+          >
+            <Image
+              src={s.poster}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority={index === 0}
+            />
+            {mountedVideoIds.has(s.id) ? (
+              <HeroSlideVideo
+                src={s.videoUrl}
+                ready={readyVideoIds.has(s.id)}
+                onReady={() =>
+                  setReadyVideoIds((prev) => {
+                    if (prev.has(s.id)) return prev;
+                    const next = new Set(prev);
+                    next.add(s.id);
+                    return next;
+                  })
+                }
+                onGiveUp={() => {
+                  setFailedVideoIds((prev) => {
+                    if (prev.has(s.id)) return prev;
+                    const next = new Set(prev);
+                    next.add(s.id);
+                    return next;
+                  });
+                  setMountedVideoIds((prev) => {
+                    if (!prev.has(s.id)) return prev;
+                    const next = new Set(prev);
+                    next.delete(s.id);
+                    return next;
+                  });
+                }}
+              />
+            ) : null}
+          </div>
         ))}
         <div
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,29,54,0.42)_0%,rgba(11,29,54,0.22)_45%,rgba(11,29,54,0.88)_100%)]"

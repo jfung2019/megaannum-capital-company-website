@@ -15,6 +15,11 @@ export type HeroSlide = {
   id: string;
   /** Background clip. The CMS upload overrides the first slide's, else the bundled clip. */
   videoUrl: string;
+  /** Still frame shown while the video loads (or in place of it, on a
+   *  connection too slow/congested to load the video at all -- confirmed
+   *  necessary for mainland China, where the video can fail to finish even
+   *  when the page itself loads). */
+  poster: string;
   /** Small label above the heading lines, e.g. "Our Mission". Omit for none. */
   eyebrow?: string;
   headingLines: HeroHeadingLine[];
@@ -57,6 +62,7 @@ export const HERO_CONTENT: HeroContent = {
     {
       id: "bridge",
       videoUrl: "/videos/mgcap1.mp4",
+      poster: "/images/hero-poster-bridge.jpg",
       headingLines: [
         { text: "Chinese", color: "#ffffff" },
         { text: "Deep Technology", color: "#ed7d24" },
@@ -66,6 +72,7 @@ export const HERO_CONTENT: HeroContent = {
     {
       id: "mission",
       videoUrl: "/videos/mgcap4.mp4",
+      poster: "/images/hero-poster-mission.jpg",
       headingLines: [
         {
           text: "Investing in and building world-class technology companies",
