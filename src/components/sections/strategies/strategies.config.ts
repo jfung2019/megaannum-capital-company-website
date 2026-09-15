@@ -4,7 +4,7 @@ export type Sector = {
   id: string;
   icon: SectorIcon;
   heading: string;
-  body: string;
+  items: string[];
 };
 
 export type StrategyIcon =
@@ -78,40 +78,64 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
       id: "sector-coverage",
       icon: "sectors",
       image: "/images/core_str_img_2034735552.jpeg",
-      heading: "Multi-sector coverage",
+      heading: "Multi-sector Investment coverage",
       intro:
-        "The firm’s investment mandate covers multiple high growth technology sectors. We focus not only on leading projects within individual sectors but also on cross sector synergies and technological convergence, identifying structural investment opportunities at the intersection of different industries.",
+        "The firm's investment mandate covers multiple high growth technology sectors including artificial intelligence and intelligent computing, advanced manufacturing and industrial automation, new energy and energy transition, semiconductors and information technology, and frontier technologies. We focus not only on leading projects within individual sectors but also on cross sector synergies and technological convergence, identifying structural investment opportunities at the intersection of different industries. ",
       lead: "The firm focuses on growth stage and pre-IPO investments across the following high growth technology sectors.",
       sectors: [
         {
           id: "ai-computing",
           icon: "ai",
           heading: "AI and intelligent computing",
-          body: "AI infrastructure, large language model applications, AI chips and smart computing centre related value chains.",
+          items: [
+            "AI infrastructure",
+            "Large language model applications",
+            "AI chips",
+            "Smart computing centre related value chains",
+          ],
         },
         {
           id: "manufacturing-automation",
           icon: "manufacturing",
           heading: "Advanced manufacturing and automation",
-          body: "Industrial robotics, automated production lines, high end equipment and critical components.",
+          items: [
+            "Industrial robotics",
+            "Automated production lines",
+            "High end equipment",
+            "Critical components",
+          ],
         },
         {
           id: "energy-transition",
           icon: "energy",
           heading: "New energy and energy transition",
-          body: "Energy storage systems, photovoltaic value chains, hydrogen equipment and smart grids.",
+          items: [
+            "Energy storage systems",
+            "Photovoltaic value chains",
+            "Hydrogen equipment",
+            "Smart grids",
+          ],
         },
         {
           id: "semiconductors-it",
           icon: "semiconductors",
           heading: "Semiconductors and information technology",
-          body: "Chip design, semiconductor materials, optical communications and 5G and 6G infrastructure.",
+          items: [
+            "Chip design",
+            "Semiconductor materials",
+            "Optical communications",
+            "5G and 6G infrastructure",
+          ],
         },
         {
           id: "frontier-tech",
           icon: "frontier",
           heading: "Frontier technologies",
-          body: "Embodied intelligence, brain computer interfaces and quantum technologies.",
+          items: [
+            "Embodied intelligence",
+            "Brain computer interfaces",
+            "Quantum technologies",
+          ],
         },
       ],
     },

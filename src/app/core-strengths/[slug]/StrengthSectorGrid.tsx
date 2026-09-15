@@ -29,7 +29,16 @@ export default function StrengthSectorGrid({ sectors }: { sectors: Sector[] }) {
             >
               {sector.heading}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-black/55">{sector.body}</p>
+            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-black/55">
+              {sector.items.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="text-[#ed7d24]" aria-hidden>
+                    &middot;
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         );
       })}
