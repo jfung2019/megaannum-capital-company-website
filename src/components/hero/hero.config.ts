@@ -62,15 +62,6 @@ export const HERO_CONTENT: HeroContent = {
   brand: "Megaannum Capital Limited",
   slides: [
     {
-      id: "bridge",
-      videoUrl: "/videos/mgcap1.mp4",
-      poster: "/images/hero-poster-bridge.jpg",
-      headingLines: [
-        { text: "Chinese Innovation", color: "#ed7d24" },
-        { text: "Global Capital", color: "#ffffff" },
-      ],
-    },
-    {
       id: "mission",
       videoUrl: "/videos/mgcap4.mp4",
       poster: "/images/hero-poster-mission.jpg",
@@ -80,6 +71,15 @@ export const HERO_CONTENT: HeroContent = {
           color: "#ffffff",
           leadColor: "#ed7d24",
         },
+      ],
+    },
+    {
+      id: "bridge",
+      videoUrl: "/videos/mgcap1.mp4",
+      poster: "/images/hero-poster-bridge.jpg",
+      headingLines: [
+        { text: "Chinese Innovation", color: "#ed7d24" },
+        { text: "Global Capital", color: "#ffffff" },
       ],
     },
   ],
