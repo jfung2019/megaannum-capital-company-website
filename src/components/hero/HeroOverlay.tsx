@@ -292,7 +292,7 @@ export default function HeroOverlay({
         />
 
         <header className="pointer-events-none absolute inset-0 z-10 flex h-full flex-col">
-          <nav className="pointer-events-auto flex items-center justify-between px-6 py-6 md:px-10 md:py-8 lg:px-14 xl:px-20">
+          <nav className="pointer-events-auto relative z-50 flex items-center justify-between px-6 py-6 md:px-10 md:py-8 lg:px-14 xl:px-20">
             {logo ? (
               <a href="#home" className="flex items-center gap-3">
                 <Image
@@ -364,23 +364,25 @@ export default function HeroOverlay({
 
           {/* Always mounted (rather than conditionally rendered) so both the
               entrance and the exit can transition -- popping the menu in and
-              out with no transition at all reads as broken. Scales in from
-              the trigger's corner, not center, and starts from 0.95 rather
-              than 0 (nothing in the real world appears from nothing). */}
+              out with no transition at all reads as broken. Drops down from
+              behind the header, but stops short of the full screen height so
+              a sliver of the page still shows underneath -- the header nav
+              row stays above it (z-50) so the logo and the hamburger-turned-
+              close button remain usable the whole time. */}
           <div
             id="mobile-nav"
-            className={`absolute inset-x-0 top-[4.75rem] z-20 mx-6 origin-top-right rounded-lg border border-white/10 bg-[#0b1d36]/95 p-6 shadow-2xl backdrop-blur-xl transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] md:mx-10 lg:hidden ${
-              menuOpen ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
+            className={`fixed inset-x-0 top-0 z-40 flex h-[82svh] flex-col bg-[#0b1d36] transition-transform duration-[450ms] ease-[cubic-bezier(0.23,1,0.32,1)] lg:hidden ${
+              menuOpen ? "pointer-events-auto translate-y-0" : "pointer-events-none -translate-y-full"
             }`}
             aria-hidden={!menuOpen}
           >
-            <ul className="flex flex-col gap-4 text-sm text-white/80">
+            <ul className="flex flex-1 flex-col justify-center gap-7 px-8 pt-20 pb-10">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     tabIndex={menuOpen ? 0 : -1}
-                    className="block py-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                    className="block text-2xl font-medium text-white/85 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.label}
@@ -389,7 +391,7 @@ export default function HeroOverlay({
               ))}
             </ul>
 
-            <div className="mt-6 border-t border-white/10 pt-6">
+            <div className="border-t border-white/10 px-8 py-6">
               <LanguageToggle />
             </div>
           </div>
