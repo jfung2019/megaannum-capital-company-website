@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
+import ShimmerImage from "@/components/ShimmerImage";
 import { STRATEGIES_CONTENT, type StrategiesContent } from "./strategies/strategies.config";
 
 const playfair = Playfair_Display({
@@ -123,12 +123,12 @@ export default function StrategiesSection({
               className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white text-[#1a1714] opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.98]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
+                <ShimmerImage
                   src={item.image}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
+                  className="object-cover transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
                 />
               </div>
               <div className="flex flex-1 flex-col p-5">

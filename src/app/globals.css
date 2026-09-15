@@ -58,3 +58,14 @@ body {
     width: 100%;
   }
 }
+
+/* Photo placeholders: a soft diagonal sweep behind an image while it loads,
+   swapped for the real photo (see ShimmerImage) instead of a blank gap. */
+@keyframes shimmer-sweep {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}

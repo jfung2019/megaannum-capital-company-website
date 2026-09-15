@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
 import { ArrowRight } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
+import ShimmerImage from "@/components/ShimmerImage";
 import { STRATEGIES_CONTENT } from "@/components/sections/strategies/strategies.config";
 import StrengthSectorGrid from "./StrengthSectorGrid";
 
@@ -81,13 +81,13 @@ export default async function CoreStrengthPage({ params }: PageProps) {
           {/* Full-width banner -- the sector grid below already uses the
               page's full width, so there's no empty space to fill here. */}
           <div className="relative h-[36vh] w-full md:h-[52vh]">
-            <Image
+            <ShimmerImage
               src={item.image}
               alt=""
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover transition-opacity duration-500"
             />
             <div
               className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(11,29,54,0.75)_0%,rgba(11,29,54,0.15)_45%,transparent_100%)]"
@@ -120,13 +120,13 @@ export default async function CoreStrengthPage({ params }: PageProps) {
         <div className="w-full px-6 py-16 md:px-10 md:py-20 lg:px-14 xl:px-20">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16 xl:gap-20">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full lg:min-h-[36rem]">
-              <Image
+              <ShimmerImage
                 src={item.image}
                 alt=""
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className={`object-cover ${
+                className={`object-cover transition-opacity duration-500 ${
                   item.imagePosition === "top"
                     ? "object-top"
                     : item.imagePosition === "bottom"

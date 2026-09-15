@@ -18,27 +18,32 @@ const SECTOR_ICONS: Record<SectorIcon, LucideIcon> = {
 
 export default function StrengthSectorGrid({ sectors }: { sectors: Sector[] }) {
   return (
-    <div className="mt-8 grid grid-cols-1 border-t border-l border-black/10 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
       {sectors.map((sector) => {
         const Icon = SECTOR_ICONS[sector.icon];
         return (
-          <div key={sector.id} className="border-r border-b border-black/10 p-7 md:p-8">
-            <Icon size={22} strokeWidth={1.5} className="text-[#ed7d24]" aria-hidden />
+          <div
+            key={sector.id}
+            className="group flex min-h-[340px] flex-col justify-between rounded-lg border border-transparent bg-[#f1efe8] p-7 transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1.5 hover:border-[#ed7d24]/25 hover:bg-white hover:shadow-xl hover:shadow-black/[0.06] md:p-8"
+          >
             <p
-              className={`${playfair.className} mt-4 text-lg leading-snug font-medium tracking-tight text-[#1a1714]`}
+              className={`${playfair.className} text-lg leading-snug font-medium tracking-tight text-[#1a1714]`}
             >
               {sector.heading}
             </p>
-            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-black/55">
-              {sector.items.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="text-[#ed7d24]" aria-hidden>
-                    &middot;
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+
+            <div className="flex flex-1 items-center justify-center">
+              <Icon
+                size={56}
+                strokeWidth={1.25}
+                className="text-[#ed7d24] transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                aria-hidden
+              />
+            </div>
+
+            <p className="text-xs leading-relaxed text-black/50">
+              {sector.items.join(" | ")}
+            </p>
           </div>
         );
       })}

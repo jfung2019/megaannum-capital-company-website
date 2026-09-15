@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 
+import ShimmerImage from "@/components/ShimmerImage";
 import { PLATFORM_CONTENT, type PlatformContent } from "./platform/platform.config";
 
 const playfair = Playfair_Display({
@@ -31,12 +31,12 @@ export default function PlatformSectionContent({
       <div className="w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-            <Image
+            <ShimmerImage
               src="/images/bridge-china.jpg"
               alt=""
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover transition-opacity duration-500"
             />
           </div>
 
