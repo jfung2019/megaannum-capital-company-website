@@ -80,7 +80,7 @@ export default async function CoreStrengthPage({ params }: PageProps) {
         <>
           {/* Full-width banner -- the sector grid below already uses the
               page's full width, so there's no empty space to fill here. */}
-          <div className="relative h-[32vh] w-full md:h-[42vh]">
+          <div className="relative h-[36vh] w-full md:h-[52vh]">
             <Image
               src={item.image}
               alt=""
@@ -119,14 +119,20 @@ export default async function CoreStrengthPage({ params }: PageProps) {
         // a top banner, using the width rather than leaving it empty.
         <div className="w-full px-6 py-16 md:px-10 md:py-20 lg:px-14 xl:px-20">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16 xl:gap-20">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full lg:min-h-[28rem]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full lg:min-h-[36rem]">
               <Image
                 src={item.image}
                 alt=""
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                className={`object-cover ${
+                  item.imagePosition === "top"
+                    ? "object-top"
+                    : item.imagePosition === "bottom"
+                      ? "object-bottom"
+                      : "object-center"
+                }`}
               />
             </div>
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { HERO_CONTENT, NAV_LINKS } from "./hero/hero.config";
+import LanguageToggle from "./LanguageToggle";
 
 /**
  * Solid (non-transparent) header for pages other than the homepage -- same
@@ -41,16 +42,19 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
           </Link>
         )}
 
-        <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={`/${link.href}`}
-              className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="flex items-center gap-4">
+          <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={`/${link.href}`}
+                className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <LanguageToggle />
         </div>
       </nav>
     </header>

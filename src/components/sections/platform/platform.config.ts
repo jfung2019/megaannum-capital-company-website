@@ -27,13 +27,10 @@ export type PlatformContent = {
 };
 
 export const PLATFORM_CONTENT: PlatformContent = {
-  headline: "A bridge between Chinese deep technology and global capital",
+  headline: "Bridging China's Frontier Science with Global Capital.",
   intro:
-    "China has accumulated world class research capabilities and industrial foundations in deep technology. The Chinese Academy of Sciences, as the country’s strategic scientific institution, continues to produce original breakthroughs in artificial intelligence, advanced materials, new energy and other fields. However, many high-quality deep technology projects face challenges in commercialisation, capital access, market expansion and internationalisation. By embedding ourselves within the Chinese Academy of Sciences technology transfer ecosystem, we help bring frontier research outcomes from the laboratory to global markets.\n\nInternational capital is accelerating its allocation to Chinese deep technology assets at an unprecedented pace. China’s rapid rise in new energy, artificial intelligence, semiconductors and other fields has created structural opportunities for global investors. However, international capital faces challenges in project screening, due diligence and portfolio management when entering the Chinese market. Our deep understanding of China’s industrial ecosystem and professional investment management capabilities enable us to connect international capital with quality investment opportunities in China’s deep technology sector.",
-  introHeadings: [
-    "Connecting Chinese Technology with Global Markets",
-    "Connecting International Capital with Chinese Opportunities",
-  ],
+    "China’s research institutions, led by the Chinese Academy of Sciences, continue to drive foundational breakthroughs across artificial intelligence, advanced materials, and clean energy. Translating laboratory innovation into scalable global enterprises requires dedicated operational stewardship, just as international investors require disciplined local execution and rigorous due diligence to access these high-conviction opportunities. Embedded within China’s technology transfer ecosystem, Megaannum Capital bridges this divide. We align institutional standards with deep industrial access, enabling global capital to effectively partner with transformative science and build resilient, world-class enterprises.",
+  introHeadings: [],
   stats: [
     {
       value: 5,

@@ -64,8 +64,7 @@ export const HERO_CONTENT: HeroContent = {
       videoUrl: "/videos/mgcap1.mp4",
       poster: "/images/hero-poster-bridge.jpg",
       headingLines: [
-        { text: "Chinese", color: "#ffffff" },
-        { text: "Deep Technology", color: "#ed7d24" },
+        { text: "Chinese Innovation", color: "#ffffff" },
         { text: "Global Capital", color: "#ffffff" },
       ],
     },
@@ -75,14 +74,14 @@ export const HERO_CONTENT: HeroContent = {
       poster: "/images/hero-poster-mission.jpg",
       headingLines: [
         {
-          text: "Investing in and building world-class technology companies",
+          text: "Cultivating enduring technology enterprises",
           color: "#ffffff",
         },
       ],
     },
   ],
   body:
-    "Megaannum Capital is a Hong Kong based private equity firm focused on growth stage and pre-IPO investments in the technology sector. The firm provides professional cross border investment management services to institutional investors, family offices and industrial capital worldwide.\n\nThe firm maintains deep roots in China’s industrial and technology ecosystem while having established an extensive capital network across the Middle East, Southeast Asia and other emerging markets. Operating out of Hong Kong, we serve as a bridge connecting Chinese deep technology with global capital. Our competitive advantages are built on cross border technology transfer, industrial global expansion and co investment capabilities.",
+    "Megaannum Capital is a Hong Kong-based private equity firm specializing in growth-stage and pre-IPO technology investments. Rooted in China’s innovation ecosystem, we deliver cross-border asset management for global institutions and family offices.\n\nLeveraging established networks across the Middle East and Southeast Asia, we operate as a strategic bridge. We focus on connecting Chinese deep technology with international capital, facilitating value creation through technology transfer, global expansion, and co-investment initiatives.",
   cta: {
     label: "Speak with us",
     href: "#contact",

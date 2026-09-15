@@ -148,8 +148,7 @@ export function platformContent(raw: unknown): PlatformContent {
 
 /** The bundled partners carry a Logo component; CMS partners carry an image. */
 export function partnerList(raw: unknown): PartnerView[] {
-  const fallback = (): PartnerView[] =>
-    PARTNERS.map((p) => ({ id: p.id, name: p.name, image: null, Logo: p.Logo }));
+  const fallback = (): PartnerView[] => PARTNERS;
 
   const partners = rows(obj(raw).partners);
   if (!partners) return fallback();

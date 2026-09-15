@@ -65,7 +65,7 @@ export default function MissionSection({
     };
   }, []);
 
-  const { eyebrow, heading, paragraphs } = content;
+  const { heading, paragraphs } = content;
 
   return (
     <section
@@ -78,20 +78,15 @@ export default function MissionSection({
         ref={contentRef}
         className="w-full px-6 py-24 opacity-0 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
-        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-14 lg:gap-20">
-          <div>
-            <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
-              {eyebrow}
-            </p>
-            <h2
-              id="mission-heading"
-              className={`${playfair.className} mt-5 text-4xl leading-[1.1] font-medium tracking-tight md:text-[2.65rem]`}
-            >
-              {heading}
-            </h2>
-          </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2
+            id="mission-heading"
+            className={`${playfair.className} text-4xl leading-[1.1] font-medium tracking-tight md:text-[2.65rem]`}
+          >
+            {heading}
+          </h2>
 
-          <div className="flex flex-col gap-6">
+          <div className="mt-8 flex flex-col gap-6">
             {paragraphs.map((paragraph, index) => (
               <p
                 key={index}

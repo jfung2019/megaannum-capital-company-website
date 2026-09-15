@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
+import { Mail } from "lucide-react";
 import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
@@ -76,13 +77,13 @@ export default function ContactSection({
     <section
       ref={sectionRef}
       id="contact"
-      className={`w-full bg-[#0b1d36] text-white ${className}`.trim()}
+      className={`w-full bg-[#f6f3ec] text-[#1a1714] ${className}`.trim()}
       aria-labelledby="contact-heading"
     >
       <div className="w-full px-6 py-24 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20">
         <div className="mx-auto max-w-2xl">
           <div ref={contentRef} className="text-center opacity-0">
-            <p className="font-mono text-[11px] font-medium tracking-[0.22em] text-white/45 uppercase">
+            <p className="font-mono text-[11px] font-medium tracking-[0.22em] text-black/45 uppercase">
               {eyebrow}
             </p>
             <h2
@@ -91,25 +92,32 @@ export default function ContactSection({
             >
               {heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-white/65 md:text-[1.05rem] md:leading-8">
+            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-black/65 md:text-[1.05rem] md:leading-8">
               {subhead}
             </p>
 
-            <ul className="mt-10 space-y-5 border-t border-white/10 pt-10">
+            <ul className="mt-10 space-y-5 border-t border-black/10 pt-10">
               {details.map((item) => (
                 <li key={item.label}>
-                  <p className="font-mono text-[10px] tracking-[0.18em] text-white/40 uppercase">
+                  <p className="font-mono text-[10px] tracking-[0.18em] text-black/40 uppercase">
                     {item.label}
                   </p>
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="mt-1 inline-block text-base text-white underline-offset-4 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#ed7d24] hover:underline"
+                      className="mt-1 inline-flex items-center gap-1.5 text-base text-[#1a1714] underline-offset-4 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#ed7d24] hover:underline"
                     >
-                      {item.value}
+                      {item.href.startsWith("mailto:") ? (
+                        <>
+                          <Mail size={16} strokeWidth={2} aria-hidden />
+                          Email us
+                        </>
+                      ) : (
+                        item.value
+                      )}
                     </a>
                   ) : (
-                    <p className="mt-1 text-base text-white">{item.value}</p>
+                    <p className="mt-1 text-base text-[#1a1714]">{item.value}</p>
                   )}
                 </li>
               ))}

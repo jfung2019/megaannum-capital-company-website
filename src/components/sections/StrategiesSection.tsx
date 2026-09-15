@@ -92,7 +92,7 @@ export default function StrategiesSection({
     <section
       ref={sectionRef}
       id="platform"
-      className={`w-full bg-[#f6f3ec] text-[#1a1714] ${className}`.trim()}
+      className={`w-full bg-[#0b1d36] text-white ${className}`.trim()}
       aria-labelledby="platform-heading"
     >
       <div
@@ -100,7 +100,7 @@ export default function StrategiesSection({
         className="w-full px-6 py-24 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
         <header data-strategy-header className="max-w-6xl opacity-0">
-          <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
+          <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-white/45 uppercase">
             {eyebrow}
           </p>
           <h2
@@ -109,7 +109,7 @@ export default function StrategiesSection({
           >
             {heading}
           </h2>
-          <p className="mt-6 max-w-5xl text-base leading-relaxed text-black/60 md:text-[1.05rem] md:leading-8">
+          <p className="mt-6 max-w-5xl text-base leading-relaxed text-white/65 md:text-[1.05rem] md:leading-8">
             {intro}
           </p>
         </header>
@@ -120,7 +120,7 @@ export default function StrategiesSection({
               key={item.id}
               href={`/core-strengths/${item.id}`}
               data-strategy-card
-              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.98]"
+              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white text-[#1a1714] opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.98]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image

@@ -2,26 +2,12 @@ import type { ComponentType } from "react";
 
 import type { CmsImage } from "@/lib/cms/map";
 
-import {
-  ClearflowLogo,
-  HorizonLogo,
-  LatticeLogo,
-  MeridianLogo,
-  NorthgateLogo,
-  VaultlineLogo,
-} from "./PartnerLogos";
-
-export type Partner = {
-  id: string;
-  name: string;
-  Logo: ComponentType<{ className?: string }>;
-};
+import { CasLogo, SdicLogo, ShanghaiElectricLogo } from "./PartnerLogos";
 
 /**
- * What the carousel actually renders. A CMS partner carries `image`; a bundled
+ * What the section actually renders. A CMS partner carries `image`; a bundled
  * fallback carries `Logo`, which is a component reference and so can never come
- * from JSON. PartnersCarousel is a server component, so holding one crosses no
- * client boundary.
+ * from JSON.
  */
 export type PartnerView = {
   id: string;
@@ -30,11 +16,20 @@ export type PartnerView = {
   Logo: ComponentType<{ className?: string }> | null;
 };
 
-export const PARTNERS: Partner[] = [
-  { id: "meridian", name: "Meridian", Logo: MeridianLogo },
-  { id: "horizon", name: "Horizon", Logo: HorizonLogo },
-  { id: "vaultline", name: "Vaultline", Logo: VaultlineLogo },
-  { id: "northgate", name: "Northgate AI", Logo: NorthgateLogo },
-  { id: "clearflow", name: "Clearflow", Logo: ClearflowLogo },
-  { id: "lattice", name: "Lattice", Logo: LatticeLogo },
+export type PartnersContent = {
+  /** Label above the first partner (the CAS relationship). */
+  strategicLabel: string;
+  /** Label above the remaining partners. */
+  collaborateLabel: string;
+};
+
+export const PARTNERS_CONTENT: PartnersContent = {
+  strategicLabel: "Strategic Partner",
+  collaborateLabel: "Collaborate with",
+};
+
+export const PARTNERS: PartnerView[] = [
+  { id: "cas", name: "Chinese Academy of Sciences", image: null, Logo: CasLogo },
+  { id: "shanghai-electric", name: "Shanghai Electric", image: null, Logo: ShanghaiElectricLogo },
+  { id: "sdic", name: "SDIC", image: null, Logo: SdicLogo },
 ];

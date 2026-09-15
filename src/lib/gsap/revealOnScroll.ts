@@ -41,6 +41,8 @@ export function revealOnScroll(
     if (played) return;
     played = true;
     timeline.play(0);
+    window.removeEventListener("scroll", sync);
+    window.removeEventListener("resize", sync);
   };
 
   const sync = () => {
@@ -66,7 +68,17 @@ export function revealOnScroll(
     });
   });
 
+  // Belt-and-suspenders: IntersectionObserver should catch every case, but a
+  // plain scroll/resize listener costs little and guarantees a section can
+  // never stay stuck at opacity 0 if the observer misbehaves on some
+  // device/browser combination -- it just recomputes the same visibility
+  // check IntersectionObserver would have.
+  window.addEventListener("scroll", sync, { passive: true });
+  window.addEventListener("resize", sync);
+
   return () => {
     observer.disconnect();
+    window.removeEventListener("scroll", sync);
+    window.removeEventListener("resize", sync);
   };
 }

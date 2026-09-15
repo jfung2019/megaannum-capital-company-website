@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
 
+import LanguageToggle from "@/components/LanguageToggle";
+
 import { HERO_CONTENT, NAV_LINKS, type HeroContent } from "./hero.config";
 import {
   readConnection,
@@ -320,38 +322,44 @@ export default function HeroOverlay({
               </a>
             )}
 
-            <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="hidden items-center gap-4 text-sm text-white/70 lg:flex xl:gap-6">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
 
-            <button
-              type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 lg:hidden"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-nav"
-              onClick={() => setMenuOpen((open) => !open)}
-            >
-              <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-              <span aria-hidden className="flex flex-col gap-1.5">
-                <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "translate-y-1 rotate-45" : ""}`}
-                />
-                <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "opacity-0" : ""}`}
-                />
-                <span
-                  className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "-translate-y-1 -rotate-45" : ""}`}
-                />
-              </span>
-            </button>
+              <div className="hidden lg:block">
+                <LanguageToggle />
+              </div>
+
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 lg:hidden"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-nav"
+                onClick={() => setMenuOpen((open) => !open)}
+              >
+                <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+                <span aria-hidden className="flex flex-col gap-1.5">
+                  <span
+                    className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`}
+                  />
+                  <span
+                    className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "opacity-0" : ""}`}
+                  />
+                  <span
+                    className={`block h-px w-4 bg-current transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
+                  />
+                </span>
+              </button>
+            </div>
           </nav>
 
           {/* Always mounted (rather than conditionally rendered) so both the
@@ -380,6 +388,10 @@ export default function HeroOverlay({
                 </li>
               ))}
             </ul>
+
+            <div className="mt-6 border-t border-white/10 pt-6">
+              <LanguageToggle />
+            </div>
           </div>
 
           <div className="relative flex flex-1 flex-col px-6 pt-10 pb-10 md:px-10 md:pt-14 md:pb-56 lg:px-14 xl:px-20">

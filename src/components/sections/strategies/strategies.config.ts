@@ -20,6 +20,8 @@ export type Strategy =
       id: string;
       icon: StrategyIcon;
       image: string;
+      /** Crop anchor for the image panel; defaults to centered. */
+      imagePosition?: "top" | "center" | "bottom";
       heading: string;
       body: string;
     }
@@ -118,6 +120,10 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
       id: "exit-pathways",
       icon: "exit",
       image: "/images/junkboat.jpg",
+      // The skyline (including the tallest tower's spire) sits near the top
+      // of the frame; a center crop on this tall, narrow panel was cutting
+      // it off.
+      imagePosition: "top",
       heading: "Exit pathways",
       body: "Hong Kong’s standing as an international capital market, plus our relationships with listed companies across the A-share and Hong Kong markets, gives portfolio companies options: IPO on HKEX or the A-share markets, industrial M&A, strategic sale, and cross-border equity transfer.",
     },
