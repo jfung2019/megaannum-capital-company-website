@@ -2,6 +2,8 @@ export type HeroHeadingLine = {
   text: string;
   /** CSS colour for this line; the h1 is white, so only accents differ. */
   color: string;
+  /** Colour for just the line's first word, when it should stand out from the rest. */
+  leadColor?: string;
 };
 
 import type { CmsImage } from "@/lib/cms/map";
@@ -64,7 +66,7 @@ export const HERO_CONTENT: HeroContent = {
       videoUrl: "/videos/mgcap1.mp4",
       poster: "/images/hero-poster-bridge.jpg",
       headingLines: [
-        { text: "Chinese Innovation", color: "#ffffff" },
+        { text: "Chinese Innovation", color: "#ed7d24" },
         { text: "Global Capital", color: "#ffffff" },
       ],
     },
@@ -76,6 +78,7 @@ export const HERO_CONTENT: HeroContent = {
         {
           text: "Cultivating enduring technology enterprises",
           color: "#ffffff",
+          leadColor: "#ed7d24",
         },
       ],
     },

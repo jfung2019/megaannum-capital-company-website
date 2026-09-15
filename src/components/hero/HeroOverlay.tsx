@@ -404,18 +404,29 @@ export default function HeroOverlay({
               <h1
                 className={`${playfair.className} text-5xl leading-[1.03] font-medium tracking-tight text-white md:text-6xl lg:text-6xl xl:text-7xl`}
               >
-                {slide.headingLines.map((line, index) => (
-                  <span
-                    key={`${slide.id}-${index}`}
-                    ref={(el) => {
-                      headingLineRefs.current[index] = el;
-                    }}
-                    className="block opacity-0"
-                    style={{ color: line.color }}
-                  >
-                    {line.text}
-                  </span>
-                ))}
+                {slide.headingLines.map((line, index) => {
+                  const [firstWord, ...restWords] = line.text.split(" ");
+                  const rest = restWords.join(" ");
+                  return (
+                    <span
+                      key={`${slide.id}-${index}`}
+                      ref={(el) => {
+                        headingLineRefs.current[index] = el;
+                      }}
+                      className="block opacity-0"
+                      style={{ color: line.color }}
+                    >
+                      {line.leadColor ? (
+                        <>
+                          <span style={{ color: line.leadColor }}>{firstWord}</span>
+                          {rest ? ` ${rest}` : ""}
+                        </>
+                      ) : (
+                        line.text
+                      )}
+                    </span>
+                  );
+                })}
               </h1>
             </div>
 
