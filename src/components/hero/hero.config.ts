@@ -66,11 +66,8 @@ export const HERO_CONTENT: HeroContent = {
       videoUrl: "/videos/mgcap4.mp4",
       poster: "/images/hero-poster-mission.jpg",
       headingLines: [
-        {
-          text: "Cultivating enduring technology enterprises",
-          color: "#ffffff",
-          leadColor: "#ed7d24",
-        },
+        { text: "Chinese Innovation.", color: "#ed7d24" },
+        { text: "Global Capital.", color: "#ffffff" },
       ],
     },
     {
@@ -78,8 +75,11 @@ export const HERO_CONTENT: HeroContent = {
       videoUrl: "/videos/mgcap1.mp4",
       poster: "/images/hero-poster-bridge.jpg",
       headingLines: [
-        { text: "Chinese Innovation", color: "#ed7d24" },
-        { text: "Global Capital", color: "#ffffff" },
+        {
+          text: "Cultivating enduring technology enterprises.",
+          color: "#ffffff",
+          leadColor: "#ed7d24",
+        },
       ],
     },
   ],

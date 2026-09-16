@@ -38,7 +38,7 @@ export default function StrengthSectorGrid({ sectors }: { sectors: Sector[] }) {
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>("[data-sector-card]", grid);
       if (reducedMotion) {
-        gsap.set(cards, { clearProps: "all", opacity: 1, y: 0 });
+        gsap.set(cards, { opacity: 1, y: 0 });
         return;
       }
 
@@ -67,56 +67,34 @@ export default function StrengthSectorGrid({ sectors }: { sectors: Sector[] }) {
   }, []);
 
   return (
-    <div
-      ref={gridRef}
-      className="mt-8 grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-5"
-    >
-      {sectors.map((sector) => {
-        const Icon = SECTOR_ICONS[sector.icon];
-        const tags = sector.items.join(" | ");
-        return (
-          <div
-            key={sector.id}
-            data-sector-card
-            className="group rounded-lg border border-transparent bg-[#f1efe8] transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1.5 hover:border-[#ed7d24]/25 hover:bg-white hover:shadow-xl hover:shadow-black/[0.06] sm:flex sm:min-h-[340px] sm:flex-col sm:justify-between sm:p-7 md:p-8"
-          >
-            {/* Mobile: icon-left row -- matches citiccapital.com's mobile
-                card pattern for this exact kind of sector/category grid. */}
-            <div className="flex items-center gap-5 p-5 sm:hidden">
+    <div ref={gridRef} className="mt-8">
+      <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {sectors.map((sector) => {
+          const Icon = SECTOR_ICONS[sector.icon];
+          const tags = sector.items.join(" | ");
+          return (
+            <div
+              key={sector.id}
+              data-sector-card
+              className="group relative overflow-hidden rounded-lg border border-transparent bg-[#f1efe8] p-6 transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1.5 hover:border-[#ed7d24]/25 hover:bg-white hover:shadow-xl hover:shadow-black/[0.06] sm:min-h-[220px] sm:p-7 md:p-8"
+            >
               <Icon
-                strokeWidth={1.25}
-                className="h-11 w-11 shrink-0 text-[#ed7d24] transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                strokeWidth={1}
                 aria-hidden
+                className="pointer-events-none absolute -right-4 -bottom-4 h-28 w-28 text-[#ed7d24]/10 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 sm:h-36 sm:w-36"
               />
-              <div className="min-w-0">
+              <div className="relative">
                 <p
-                  className={`${playfair.className} text-base leading-snug font-medium tracking-tight text-[#1a1714]`}
+                  className={`${playfair.className} text-base leading-snug font-medium tracking-tight text-[#1a1714] sm:text-lg`}
                 >
                   {sector.heading}
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-black/50">{tags}</p>
+                <p className="mt-2 text-xs leading-relaxed text-black/50">{tags}</p>
               </div>
             </div>
-
-            {/* Desktop/tablet: heading top, icon centered, tags bottom. */}
-            <p
-              className={`${playfair.className} hidden text-lg leading-snug font-medium tracking-tight text-[#1a1714] sm:block`}
-            >
-              {sector.heading}
-            </p>
-            <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
-              <Icon
-                strokeWidth={1.25}
-                className="h-14 w-14 text-[#ed7d24] transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
-                aria-hidden
-              />
-            </div>
-            <p className="hidden text-xs leading-relaxed text-black/50 sm:block">
-              {tags}
-            </p>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

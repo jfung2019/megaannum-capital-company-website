@@ -56,7 +56,6 @@ export default function OurPeopleSection({
         gsap.set(
           [eyebrow, heading, accentLine, portfolioHeading, ...cards],
           {
-            clearProps: "all",
             opacity: 1,
             y: 0,
             scaleX: 1,

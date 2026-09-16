@@ -25,7 +25,7 @@ export type PartnersContent = {
 
 export const PARTNERS_CONTENT: PartnersContent = {
   strategicLabel: "Strategic Partner",
-  collaborateLabel: "Collaborate with",
+  collaborateLabel: "In collaboration with",
 };
 
 export const PARTNERS: PartnerView[] = [

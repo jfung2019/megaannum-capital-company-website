@@ -42,7 +42,7 @@ export default function WorkingHereSection({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(contentEl, { clearProps: "all", opacity: 1, y: 0 });
+        gsap.set(contentEl, { opacity: 1, y: 0 });
         return;
       }
 

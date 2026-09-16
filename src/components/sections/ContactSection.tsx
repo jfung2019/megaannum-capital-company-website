@@ -42,7 +42,7 @@ export default function ContactSection({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(content, { clearProps: "all", opacity: 1, y: 0 });
+        gsap.set(content, { opacity: 1, y: 0 });
         return;
       }
 

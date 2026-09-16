@@ -67,7 +67,7 @@ export default function PartnersSection({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(row, { clearProps: "all", opacity: 1, y: 0 });
+        gsap.set(row, { opacity: 1, y: 0 });
         return;
       }
 

@@ -42,7 +42,8 @@ export default function StrategiesSection({
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>("[data-strategy-card]", contentEl);
       if (reducedMotion) {
-        gsap.set([contentEl, ...cards], { clearProps: "all", opacity: 1, y: 0 });
+        const header = contentEl.querySelector("[data-strategy-header]");
+        gsap.set([header, ...cards], { opacity: 1, y: 0 });
         return;
       }
 

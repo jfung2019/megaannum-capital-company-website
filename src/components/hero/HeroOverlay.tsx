@@ -154,7 +154,7 @@ export default function HeroOverlay({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(panel, { clearProps: "all", opacity: 1 });
+        gsap.set(panel, { opacity: 1 });
         return;
       }
       gsap.set(panel, { y: 28, opacity: 0 });
@@ -181,7 +181,7 @@ export default function HeroOverlay({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(headingLines, { clearProps: "all", opacity: 1 });
+        gsap.set(headingLines, { opacity: 1 });
         return;
       }
       gsap.set(headingLines, { y: 36, opacity: 0 });
