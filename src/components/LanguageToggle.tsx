@@ -28,7 +28,7 @@ export default function LanguageToggle({ className = "" }: { className?: string 
           type="button"
           aria-pressed={language === option.value}
           onClick={() => setLanguage(option.value)}
-          className={`rounded-full px-2.5 py-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+          className={`cursor-pointer rounded-full px-2.5 py-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] ${
             language === option.value
               ? "bg-[#ed7d24] text-white"
               : "text-white/70 hover:text-white"
