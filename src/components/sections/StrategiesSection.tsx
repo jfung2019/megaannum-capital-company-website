@@ -121,31 +121,35 @@ export default function StrategiesSection({
               key={item.id}
               href={`/core-strengths/${item.id}`}
               data-strategy-card
-              className="group flex flex-col overflow-hidden rounded-xl border border-black/10 bg-white text-[#1a1714] opacity-0 transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-black/20 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg active:scale-[0.98]"
+              className="group relative flex aspect-[4/3] w-full flex-col justify-end overflow-hidden rounded-xl border border-white/10 opacity-0 transition-[border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-[#ed7d24]/40 active:scale-[0.98]"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <ShimmerImage
-                  src={item.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <h3
-                    className={`${playfair.className} text-lg leading-snug font-medium tracking-tight`}
-                  >
-                    {item.heading}
-                  </h3>
-                  <span
-                    aria-hidden
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ed7d24]/30 text-[#ed7d24] transition-[background-color,border-color,color,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:border-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-white"
-                  >
-                    <ArrowUpRight size={16} strokeWidth={2} />
-                  </span>
-                </div>
+              <ShimmerImage
+                src={item.image}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-[#0b1d36] mix-blend-color opacity-70"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(11,29,54,0.95)_0%,rgba(11,29,54,0.35)_55%,transparent_100%)]"
+                aria-hidden
+              />
+              <div className="relative flex items-end justify-between gap-3 p-5">
+                <h3
+                  className={`${playfair.className} text-lg leading-snug font-medium tracking-tight text-white`}
+                >
+                  {item.heading}
+                </h3>
+                <span
+                  aria-hidden
+                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ed7d24]/30 text-[#ed7d24] transition-[background-color,border-color,color,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:border-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-[#ed7d24] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-white"
+                >
+                  <ArrowUpRight size={16} strokeWidth={2} />
+                </span>
               </div>
             </Link>
           ))}
