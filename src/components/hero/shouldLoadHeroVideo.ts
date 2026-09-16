@@ -21,9 +21,7 @@ export function readConnection(): ConnectionHint | undefined {
 
 export function shouldLoadHeroVideo(
   connection: ConnectionHint | undefined,
-  prefersReducedMotion: boolean,
 ): boolean {
-  if (prefersReducedMotion) return false;
   if (!connection) return true;
   if (connection.saveData) return false;
   // slow-2g/2g are unambiguous -- Chrome doesn't label a connection that low

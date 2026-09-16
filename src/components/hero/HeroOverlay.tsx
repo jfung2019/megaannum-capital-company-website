@@ -72,6 +72,7 @@ export default function HeroOverlay({
 }: HeroOverlayProps) {
   const { logo, brand, slides, body } = content;
   const rootRef = useRef<HTMLDivElement>(null);
+  const dotsHoverRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const headingLineRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -101,9 +102,12 @@ export default function HeroOverlay({
 
   // Posters are the default view. Video is an upgrade after we know the
   // link can carry it -- starting true would race both MP4s on first paint.
+  // Reduced motion no longer gates this: the footage still plays for these
+  // visitors, just with the crossfade between slides made instant instead of
+  // animated (see the reducedMotion checks below).
   useEffect(() => {
     const apply = () => {
-      setAllowVideo(shouldLoadHeroVideo(readConnection(), reducedMotion));
+      setAllowVideo(shouldLoadHeroVideo(readConnection()));
     };
     apply();
     const connection = readConnection() as
@@ -114,7 +118,7 @@ export default function HeroOverlay({
       | undefined;
     connection?.addEventListener?.("change", apply);
     return () => connection?.removeEventListener?.("change", apply);
-  }, [reducedMotion]);
+  }, []);
 
   useEffect(() => {
     if (!allowVideo) return;
@@ -127,6 +131,29 @@ export default function HeroOverlay({
       return next;
     });
   }, [allowVideo, activeSlide, slides, failedVideoIds]);
+
+  // Only the active slide's clip should ever be playing. Mounting on visit,
+  // above, means a slide the carousel has already left behind stays mounted
+  // (and looping) too -- on a connection good enough to allow video at all,
+  // the carousel cycling once is enough for both clips to end up loaded and
+  // playing at the same time, which is exactly what stalls a congested link
+  // (see the note above shouldLoadHeroVideo). Drop the outgoing slide's video
+  // once its crossfade has finished, so at most one plays at a time.
+  useEffect(() => {
+    const activeId = slides[activeSlide]?.id;
+    if (!activeId) return;
+    const timeout = window.setTimeout(() => {
+      setMountedVideoIds((prev) => {
+        if (prev.size <= 1 && prev.has(activeId)) return prev;
+        return prev.has(activeId) ? new Set([activeId]) : new Set();
+      });
+      setReadyVideoIds((prev) => {
+        if (prev.size <= 1 && prev.has(activeId)) return prev;
+        return prev.has(activeId) ? new Set([activeId]) : new Set();
+      });
+    }, 1500);
+    return () => window.clearTimeout(timeout);
+  }, [activeSlide, slides]);
 
   // Pinned as an overlay on desktop, always -- the panel was shortened
   // specifically so it reliably fits without reaching the heading or the
@@ -211,15 +238,36 @@ export default function HeroOverlay({
     setActiveSlide(index);
   };
 
+  // Hover-to-pause (scoped to just the carousel dots, not the whole video
+  // view) reads real mouseenter/mouseleave, but scrolling can carry the dots
+  // out from under a stationary cursor -- firing mouseleave -- and then back
+  // under it on the way up without ever firing the matching mouseenter
+  // (browsers only dispatch enter/leave on actual pointer motion, not on
+  // content sliding back under a still cursor). Left alone, that leaves the
+  // carousel paused forever with no future event able to un-stick it. Resync
+  // against the real CSS :hover state on scroll so it can't stay wrong for
+  // longer than a scroll event.
+  useEffect(() => {
+    const dots = dotsHoverRef.current;
+    if (!dots) return;
+    let ticking = false;
+    const resync = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setPaused(dots.matches(":hover"));
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", resync, { passive: true });
+    return () => window.removeEventListener("scroll", resync);
+  }, []);
+
   // Crossfading between videos means the transition can't wait for an
   // "ended" event -- both clips loop continuously in the background, and a
   // fixed interval decides when the next one fades in.
   useEffect(() => {
     if (slides.length < 2 || paused) return;
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reducedMotion) return;
 
     const id = window.setInterval(() => {
       headingLineRefs.current = [];
@@ -232,8 +280,6 @@ export default function HeroOverlay({
     <div ref={rootRef} className={`relative w-full ${className}`.trim()}>
       <div
         className="relative h-svh w-full overflow-hidden bg-[#0b1d36]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
       >
         {/* Poster is the default view (and the LCP image). Video is layered
             on top only after the connection looks able to carry it, and only
@@ -244,7 +290,9 @@ export default function HeroOverlay({
         {slides.map((s, index) => (
           <div
             key={s.id}
-            className="absolute inset-0 transition-opacity duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
+            className={`absolute inset-0 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+              reducedMotion ? "" : "transition-opacity duration-[1400ms]"
+            }`}
             style={{ opacity: index === activeSlide ? 1 : 0 }}
             aria-hidden={index !== activeSlide}
           >
@@ -433,7 +481,12 @@ export default function HeroOverlay({
             </div>
 
             {slides.length > 1 ? (
-              <div className="pointer-events-auto mt-10 flex gap-2 lg:mt-14">
+              <div
+                ref={dotsHoverRef}
+                className="pointer-events-auto mt-10 flex gap-2 lg:mt-14"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
                 {slides.map((s, index) => (
                   // Extra vertical padding (with a matching negative margin)
                   // makes the actual tap target a comfortable size without
