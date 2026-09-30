@@ -15,13 +15,24 @@ export type NavLink = {
 
 export type HeroSlide = {
   id: string;
-  /** Background clip. The CMS upload overrides the first slide's, else the bundled clip. */
-  videoUrl: string;
+  /** Background clip. Omit for a static-image slide -- no video loading
+   *  happens for it at all, it just shows `poster`. The CMS upload overrides
+   *  the first slide's, else the bundled clip. */
+  videoUrl?: string;
   /** Still frame shown while the video loads (or in place of it, on a
    *  connection too slow/congested to load the video at all -- confirmed
    *  necessary for mainland China, where the video can fail to finish even
-   *  when the page itself loads). */
+   *  when the page itself loads). For a slide with no `videoUrl`, this is
+   *  simply the slide's image. */
   poster: string;
+  /** Vertical crop anchor for `poster` under object-cover, 0 (top) to 100
+   *  (bottom); defaults to 50 (centered). The hero fills the full viewport
+   *  height (h-svh) at any width, so on a wide but short window a centered
+   *  crop can clip content near the top or bottom of the source photo -- a
+   *  plain top/center/bottom preset is often too blunt (e.g. "top" can crop
+   *  straight through a skyline's midsection, showing mostly empty sky
+   *  above it), so this takes the exact percentage instead. */
+  posterPositionY?: number;
   /** Small label above the heading lines, e.g. "Our Mission". Omit for none. */
   eyebrow?: string;
   headingLines: HeroHeadingLine[];
@@ -49,7 +60,6 @@ export const NAV_LINKS: NavLink[] = [
   { href: "#mission", label: "Mission" },
   { href: "#approach", label: "Approach" },
   { href: "#platform", label: "Platform" },
-  { href: "#contact", label: "Contact" },
 ];
 
 export const HERO_CONTENT: HeroContent = {
@@ -72,8 +82,42 @@ export const HERO_CONTENT: HeroContent = {
     },
     {
       id: "bridge",
-      videoUrl: "/videos/mgcap1.mp4",
-      poster: "/images/hero-poster-bridge.jpg",
+      // Static image for now (Shanghai skyline) -- was the Shanghai video
+      // clip, swapped out per management review. No videoUrl means this
+      // slide never triggers any video loading at all.
+      poster: "/images/hero-poster-shanghai.jpg",
+      // Tuned by eye against a wide/short viewport: low enough that the
+      // towers (not empty sky) fill the frame, high enough that the spire
+      // tips stay in view instead of being cropped off the top.
+      posterPositionY: 28,
+      headingLines: [
+        {
+          text: "Cultivating enduring technology enterprises.",
+          color: "#ffffff",
+          leadColor: "#ed7d24",
+        },
+      ],
+    },
+    // TEMP: two more candidate photos added for a live carousel-length
+    // preview, reusing slide 2's own heading since these aren't tied to any
+    // copy yet. Remove (or replace with real content) once reviewed.
+    {
+      id: "shenzhen-test",
+      poster: "/images/hero-poster-shenzhen.jpg",
+      headingLines: [
+        {
+          text: "Cultivating enduring technology enterprises.",
+          color: "#ffffff",
+          leadColor: "#ed7d24",
+        },
+      ],
+    },
+    {
+      id: "beijing-test",
+      poster: "/images/hero-poster-beijing.jpg",
+      // The building's top corner sits close to the top of this photo too --
+      // same fix as the Shanghai slide.
+      posterPositionY: 25,
       headingLines: [
         {
           text: "Cultivating enduring technology enterprises.",

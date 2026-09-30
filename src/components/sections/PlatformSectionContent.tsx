@@ -92,7 +92,7 @@ export default function PlatformSectionContent({
         ref={triggerRef}
         className="w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20"
       >
-        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
+        <div className="grid w-full items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
           <div
             ref={imageRef}
             className="relative aspect-[4/3] w-full overflow-hidden rounded-xl"
@@ -121,7 +121,7 @@ export default function PlatformSectionContent({
         </div>
 
         {footnote ? (
-          <p className="mt-14 text-center text-sm text-white/60 italic md:mt-16 lg:mt-20">
+          <p className="mt-14 text-sm text-white/60 italic md:mt-16 lg:mt-20">
             {footnote}
           </p>
         ) : null}

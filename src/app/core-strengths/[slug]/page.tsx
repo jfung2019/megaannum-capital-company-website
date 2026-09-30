@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
-import { ArrowRight } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
@@ -54,24 +53,6 @@ export default async function CoreStrengthPage({ params }: PageProps) {
     </>
   );
 
-  const ctaRow = (
-    <div className="mt-10 flex flex-col gap-4 border-t border-black/10 pt-10 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-sm text-black/50">Discuss this with our team.</p>
-      <Link
-        href="/#contact"
-        className="group inline-flex w-fit items-center justify-center gap-2 rounded-full bg-[#ed7d24] px-7 py-3 text-sm font-medium text-white transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#d66e1a] active:scale-[0.97]"
-      >
-        Speak with us
-        <ArrowRight
-          size={16}
-          strokeWidth={2}
-          className="transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-          aria-hidden
-        />
-      </Link>
-    </div>
-  );
-
   return (
     <main className="relative bg-[#f6f3ec]">
       <SiteHeader />
@@ -109,8 +90,6 @@ export default async function CoreStrengthPage({ params }: PageProps) {
               <p className="max-w-4xl text-sm text-black/50">{item.lead}</p>
               <StrengthSectorGrid sectors={item.sectors} />
             </div>
-
-            <div className="max-w-4xl">{ctaRow}</div>
           </div>
         </>
       ) : (
@@ -143,7 +122,6 @@ export default async function CoreStrengthPage({ params }: PageProps) {
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
-              {ctaRow}
             </div>
           </div>
         </div>

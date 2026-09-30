@@ -122,8 +122,9 @@ export default function HeroOverlay({
 
   useEffect(() => {
     if (!allowVideo) return;
-    const id = slides[activeSlide]?.id;
-    if (!id || failedVideoIds.has(id)) return;
+    const active = slides[activeSlide];
+    const id = active?.id;
+    if (!id || !active?.videoUrl || failedVideoIds.has(id)) return;
     setMountedVideoIds((prev) => {
       if (prev.has(id)) return prev;
       const next = new Set(prev);
@@ -302,9 +303,12 @@ export default function HeroOverlay({
               fill
               sizes="100vw"
               className="object-cover"
+              style={{
+                objectPosition: `50% ${s.posterPositionY ?? 50}%`,
+              }}
               priority={index === 0}
             />
-            {mountedVideoIds.has(s.id) ? (
+            {s.videoUrl && mountedVideoIds.has(s.id) ? (
               <HeroSlideVideo
                 src={s.videoUrl}
                 ready={readyVideoIds.has(s.id)}

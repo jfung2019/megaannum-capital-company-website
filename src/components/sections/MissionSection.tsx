@@ -78,7 +78,7 @@ export default function MissionSection({
         ref={contentRef}
         className="w-full px-6 py-24 opacity-0 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="w-full">
           <h2
             id="mission-heading"
             className={`${playfair.className} text-4xl leading-[1.1] font-medium tracking-tight md:text-[2.65rem]`}

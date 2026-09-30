@@ -4,15 +4,9 @@ import MissionSection from "@/components/sections/MissionSection";
 import PlatformSection from "@/components/sections/PlatformSection";
 import PartnersSection from "@/components/sections/PartnersSection";
 import StrategiesSection from "@/components/sections/StrategiesSection";
-import ContactSection from "@/components/sections/ContactSection";
 import { PARTNERS } from "@/components/sections/partners/partners.config";
 import { getSiteContent } from "@/lib/cms/client";
-import {
-  contactContent,
-  heroContent,
-  partnerList,
-  platformContent,
-} from "@/lib/cms/map";
+import { heroContent, partnerList, platformContent } from "@/lib/cms/map";
 
 export default async function HomePage() {
   // Server-side on purpose. The sections' GSAP effects snapshot the DOM once at
@@ -36,7 +30,6 @@ export default async function HomePage() {
       <PartnersSection cmsPartners={cmsPartners} />
       <div data-page-continuation className="relative z-10">
         <StrategiesSection />
-        <ContactSection content={contactContent(cms)} />
         <Footer />
       </div>
     </main>
