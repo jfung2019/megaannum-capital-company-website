@@ -44,25 +44,20 @@ export default function PlatformSectionContent({
 
     const ctx = gsap.context(() => {
       if (reducedMotion) {
-        gsap.set(image, { clipPath: "inset(0% 0% 0% 0%)" });
-        gsap.set(text, { opacity: 1, y: 0 });
+        gsap.set([image, text], { opacity: 1, y: 0 });
         return;
       }
 
-      gsap.set(image, { clipPath: "inset(0% 100% 0% 0%)" });
-      gsap.set(text, { y: 48, opacity: 0 });
+      gsap.set(image, { y: 24, opacity: 0 });
+      gsap.set(text, { y: 24, opacity: 0 });
 
       revealTl = gsap.timeline({ paused: true });
       revealTl
-        .to(image, {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 1.1,
-          ease: "power3.inOut",
-        })
+        .to(image, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" })
         .to(
           text,
           { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
-          "-=0.5",
+          "-=0.65",
         );
     }, root);
 
