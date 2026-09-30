@@ -72,52 +72,19 @@ export const HERO_CONTENT: HeroContent = {
   brand: "Megaannum Capital Limited",
   slides: [
     {
-      id: "mission",
-      videoUrl: "/videos/mgcap4.mp4",
-      poster: "/images/hero-poster-mission.jpg",
+      id: "beijing",
+      poster: "/images/hero-poster-beijing.jpg",
+      // The building's top corner sits close to the top of this photo --
+      // same fix as the Shanghai slide below used to need.
+      posterPositionY: 25,
       headingLines: [
         { text: "Chinese Innovation.", color: "#ed7d24" },
         { text: "Global Capital.", color: "#ffffff" },
       ],
     },
     {
-      id: "bridge",
-      // Static image for now (Shanghai skyline) -- was the Shanghai video
-      // clip, swapped out per management review. No videoUrl means this
-      // slide never triggers any video loading at all.
-      poster: "/images/hero-poster-shanghai.jpg",
-      // Tuned by eye against a wide/short viewport: low enough that the
-      // towers (not empty sky) fill the frame, high enough that the spire
-      // tips stay in view instead of being cropped off the top.
-      posterPositionY: 28,
-      headingLines: [
-        {
-          text: "Cultivating enduring technology enterprises.",
-          color: "#ffffff",
-          leadColor: "#ed7d24",
-        },
-      ],
-    },
-    // TEMP: two more candidate photos added for a live carousel-length
-    // preview, reusing slide 2's own heading since these aren't tied to any
-    // copy yet. Remove (or replace with real content) once reviewed.
-    {
-      id: "shenzhen-test",
+      id: "shenzhen",
       poster: "/images/hero-poster-shenzhen.jpg",
-      headingLines: [
-        {
-          text: "Cultivating enduring technology enterprises.",
-          color: "#ffffff",
-          leadColor: "#ed7d24",
-        },
-      ],
-    },
-    {
-      id: "beijing-test",
-      poster: "/images/hero-poster-beijing.jpg",
-      // The building's top corner sits close to the top of this photo too --
-      // same fix as the Shanghai slide.
-      posterPositionY: 25,
       headingLines: [
         {
           text: "Cultivating enduring technology enterprises.",
