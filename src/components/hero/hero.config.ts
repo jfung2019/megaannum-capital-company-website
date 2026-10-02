@@ -90,6 +90,14 @@ export const HERO_CONTENT: HeroContent = {
       ],
     },
     {
+      id: "hong-kong-test-3",
+      poster: "/images/hero-poster-hk-8.jpg",
+      headingLines: [
+        { text: "Chinese Innovation.", color: "#ed7d24" },
+        { text: "Global Capital.", color: "#ffffff" },
+      ],
+    },
+    {
       id: "beijing",
       poster: "/images/hero-poster-beijing.jpg",
       // The building's top corner sits close to the top of this photo, so a
