@@ -19,7 +19,8 @@ export const FOOTER_CONTENT = {
   brand: "Megaannum Capital Limited",
   tagline: "A member of Megaannum Group Ltd",
   copyrightOwner: "Megaannum Capital Limited",
-  address: "Room 1705, Harcourt House, 39 Gloucester Road, Wanchai. HK",
-  // PLACEHOLDER: no phone number yet -- replace with the real one.
+  address: "Suite 1705, Harcourt House, 39 Gloucester Road, Wanchai, Hong Kong",
   phone: "+852 27282898",
+  disclaimer:
+    "This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to purchase any securities or investment products. Any such offer or solicitation will be made only to qualified professional investors in accordance with applicable laws and regulations.",
 } as const;

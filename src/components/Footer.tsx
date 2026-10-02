@@ -94,9 +94,14 @@ export default function Footer({ className = "" }: FooterProps) {
           </div>
         </div>
 
-        <p className="mt-5 border-t border-black/10 pt-3 text-center font-mono text-[9px] tracking-[0.12em] text-black/40 uppercase">
-          © {year} {copyrightOwner}. All rights reserved.
-        </p>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 border-t border-black/10 pt-3 font-mono text-[9px] tracking-[0.12em] text-black/40 uppercase">
+          <p>
+            © {year} {copyrightOwner}. All rights reserved.
+          </p>
+          <span className="cursor-default text-black/25">Disclaimer</span>
+          <span className="cursor-default text-black/25">Privacy Policy</span>
+          <span className="cursor-default text-black/25">Terms of Use</span>
+        </div>
       </div>
     </footer>
   );
