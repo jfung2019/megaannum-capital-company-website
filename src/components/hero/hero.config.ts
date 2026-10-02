@@ -11,6 +11,8 @@ import type { CmsImage } from "@/lib/cms/map";
 export type NavLink = {
   href: string;
   label: string;
+  /** Rendered as an outlined button in the desktop nav, not a plain link. */
+  cta?: boolean;
 };
 
 export type HeroSlide = {
@@ -49,17 +51,15 @@ export type HeroContent = {
    */
   slides: HeroSlide[];
   body: string;
-  cta: {
-    label: string;
-    href: string;
-  };
 };
 
 export const NAV_LINKS: NavLink[] = [
   { href: "#home", label: "Home" },
   { href: "#mission", label: "Mission" },
   { href: "#approach", label: "Approach" },
-  { href: "#platform", label: "Platform" },
+  { href: "#partners", label: "Partners" },
+  { href: "#platform", label: "Core Strengths" },
+  { href: "#contact", label: "Contact", cta: true },
 ];
 
 export const HERO_CONTENT: HeroContent = {
@@ -96,8 +96,4 @@ export const HERO_CONTENT: HeroContent = {
   ],
   body:
     "Megaannum Capital is a Hong Kong-based private equity firm specializing in growth-stage and pre-IPO technology investments. Rooted in China’s innovation ecosystem, we deliver cross-border asset management for global institutions and family offices.\n\nLeveraging established networks across the Middle East and Southeast Asia, we operate as a strategic bridge. We focus on connecting Chinese deep technology with international capital, facilitating value creation through technology transfer, global expansion, and co-investment initiatives.",
-  cta: {
-    label: "Speak with us",
-    href: "#contact",
-  },
 };

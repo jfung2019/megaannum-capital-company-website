@@ -7,6 +7,10 @@ import Link from "next/link";
 import { HERO_CONTENT, NAV_LINKS } from "./hero/hero.config";
 import LanguageToggle from "./LanguageToggle";
 
+// This page renders its own footer, so "Contact" can scroll in place instead
+// of navigating back to the homepage's copy of it.
+const navHref = (href: string) => (href === "#contact" ? href : `/${href}`);
+
 /**
  * Solid (non-transparent) header for pages other than the homepage -- same
  * logo, wordmark, nav links and mobile menu as the hero's overlay nav, but
@@ -51,8 +55,12 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
-                href={`/${link.href}`}
-                className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                href={navHref(link.href)}
+                className={
+                  link.cta
+                    ? "rounded-full border border-white/40 px-4 py-1.5 text-white transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-white hover:text-[#0b1d36]"
+                    : "transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                }
               >
                 {link.label}
               </Link>
@@ -100,7 +108,7 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
-                href={`/${link.href}`}
+                href={navHref(link.href)}
                 tabIndex={menuOpen ? 0 : -1}
                 className="block text-2xl font-medium text-white/85 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
                 onClick={() => setMenuOpen(false)}

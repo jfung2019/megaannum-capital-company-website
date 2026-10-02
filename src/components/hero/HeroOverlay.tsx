@@ -380,7 +380,11 @@ export default function HeroOverlay({
                   <a
                     key={link.href}
                     href={link.href}
-                    className="transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                    className={
+                      link.cta
+                        ? "rounded-full border border-white/40 px-4 py-1.5 text-white transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-white hover:text-[#0b1d36]"
+                        : "transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
+                    }
                   >
                     {link.label}
                   </a>

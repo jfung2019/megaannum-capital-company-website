@@ -107,7 +107,6 @@ describe("mapping a published payload", () => {
         ...HERO_CONTENT.slides.slice(1),
       ],
       body: "CMS body copy.",
-      cta: HERO_CONTENT.cta,
     });
 
     expect(platformContent(raw)).toEqual({

@@ -121,7 +121,6 @@ export function heroContent(raw: unknown): HeroContent {
       ...restSlides,
     ],
     body: str(landing.lower, HERO_CONTENT.body),
-    cta: HERO_CONTENT.cta,
   };
 }
 
