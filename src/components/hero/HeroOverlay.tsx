@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
 
-import LanguageToggle from "@/components/LanguageToggle";
 
 import { HERO_CONTENT, NAV_LINKS, type HeroContent } from "./hero.config";
 import {
@@ -391,10 +390,6 @@ export default function HeroOverlay({
                 ))}
               </div>
 
-              <div className="hidden lg:block">
-                <LanguageToggle />
-              </div>
-
               <button
                 type="button"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 lg:hidden"
@@ -446,10 +441,6 @@ export default function HeroOverlay({
                 </li>
               ))}
             </ul>
-
-            <div className="border-t border-white/10 px-8 py-6">
-              <LanguageToggle />
-            </div>
           </div>
 
           <div className="relative flex flex-1 flex-col px-6 pt-10 pb-10 md:px-10 md:pt-14 md:pb-56 lg:px-14 xl:px-20">

@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { HERO_CONTENT, NAV_LINKS } from "./hero/hero.config";
-import LanguageToggle from "./LanguageToggle";
 
 // This page renders its own footer, so "Contact" can scroll in place instead
 // of navigating back to the homepage's copy of it.
@@ -67,10 +66,6 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
             ))}
           </div>
 
-          <div className="hidden lg:block">
-            <LanguageToggle />
-          </div>
-
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 lg:hidden"
@@ -118,10 +113,6 @@ export default function SiteHeader({ className = "" }: { className?: string }) {
             </li>
           ))}
         </ul>
-
-        <div className="border-t border-white/10 px-8 py-6">
-          <LanguageToggle />
-        </div>
       </div>
     </header>
   );

@@ -71,32 +71,6 @@ export const HERO_CONTENT: HeroContent = {
   },
   brand: "Megaannum Capital Limited",
   slides: [
-    // TEMP: this Hong Kong photo is a watermarked stock preview (and only
-    // ~1000px wide) -- swap for a licensed full-size file before release.
-    {
-      id: "hong-kong",
-      poster: "/images/hero-poster-hk-5.jpg",
-      headingLines: [
-        { text: "Chinese Innovation.", color: "#ed7d24" },
-        { text: "Global Capital.", color: "#ffffff" },
-      ],
-    },
-    {
-      id: "hong-kong-test-2",
-      poster: "/images/hero-poster-hk-7.jpg",
-      headingLines: [
-        { text: "Chinese Innovation.", color: "#ed7d24" },
-        { text: "Global Capital.", color: "#ffffff" },
-      ],
-    },
-    {
-      id: "hong-kong-test-3",
-      poster: "/images/hero-poster-hk-8.jpg",
-      headingLines: [
-        { text: "Chinese Innovation.", color: "#ed7d24" },
-        { text: "Global Capital.", color: "#ffffff" },
-      ],
-    },
     {
       id: "beijing",
       poster: "/images/hero-poster-beijing.jpg",
