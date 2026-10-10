@@ -26,10 +26,10 @@ import {
   type TeamMember,
 } from "@/components/sections/people/people.config";
 import {
-  PLATFORM_CONTENT,
-  type PlatformContent,
-  type PlatformStat,
-} from "@/components/sections/platform/platform.config";
+  APPROACH_CONTENT,
+  type ApproachContent,
+  type ApproachStat,
+} from "@/components/sections/approach/approach.config";
 
 type Rec = Record<string, unknown>;
 
@@ -83,7 +83,7 @@ function imageUrl(ref: unknown): CmsImage | null {
  * ponytail: one regex over a free-text field. If editors need real control over
  * formatting, give them three inputs (prefix / value / suffix) in the CMS.
  */
-export function parseStat(value: string, label: string): PlatformStat | null {
+export function parseStat(value: string, label: string): ApproachStat | null {
   const m = /^(\D*)([\d.,]+)(.*)$/.exec(value.trim());
   if (!m) return null;
   const n = Number(m[2].replace(/,/g, ""));
@@ -124,24 +124,24 @@ export function heroContent(raw: unknown): HeroContent {
   };
 }
 
-export function platformContent(raw: unknown): PlatformContent {
+export function approachContent(raw: unknown): ApproachContent {
   const root = obj(raw);
   const edge = obj(root.edge);
   const asOf = str(edge.asOf, "");
   const stats = rows(edge.stats)
     ?.map((s) => parseStat(str(s.value, ""), str(s.label, "")))
-    .filter((s): s is PlatformStat => s !== null && Boolean(s.label));
-  const intro = str(edge.paragraph, PLATFORM_CONTENT.intro);
+    .filter((s): s is ApproachStat => s !== null && Boolean(s.label));
+  const intro = str(edge.paragraph, APPROACH_CONTENT.intro);
   return {
-    headline: str(edge.heading, PLATFORM_CONTENT.headline),
+    headline: str(edge.heading, APPROACH_CONTENT.headline),
     intro,
     // No CMS source for these labels, and they're written for the bundled
     // intro's two paragraphs specifically -- a published paragraph replacing
     // it renders with no labels rather than ones that no longer line up.
-    introHeadings: intro === PLATFORM_CONTENT.intro ? PLATFORM_CONTENT.introHeadings : [],
-    stats: stats?.length ? stats : PLATFORM_CONTENT.stats,
-    footnote: asOf ? `All statistics as of ${asOf}` : PLATFORM_CONTENT.footnote,
-    background: str(obj(root.general).accent, PLATFORM_CONTENT.background),
+    introHeadings: intro === APPROACH_CONTENT.intro ? APPROACH_CONTENT.introHeadings : [],
+    stats: stats?.length ? stats : APPROACH_CONTENT.stats,
+    footnote: asOf ? `All statistics as of ${asOf}` : APPROACH_CONTENT.footnote,
+    background: str(obj(root.general).accent, APPROACH_CONTENT.background),
   };
 }
 

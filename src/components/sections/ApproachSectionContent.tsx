@@ -6,22 +6,22 @@ import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
 import ShimmerImage from "@/components/ShimmerImage";
-import { PLATFORM_CONTENT, type PlatformContent } from "./platform/platform.config";
+import { APPROACH_CONTENT, type ApproachContent } from "./approach/approach.config";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
-type PlatformSectionContentProps = {
+type ApproachSectionContentProps = {
   className?: string;
-  content?: PlatformContent;
+  content?: ApproachContent;
 };
 
-export default function PlatformSectionContent({
+export default function ApproachSectionContent({
   className = "",
-  content = PLATFORM_CONTENT,
-}: PlatformSectionContentProps) {
+  content = APPROACH_CONTENT,
+}: ApproachSectionContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -48,12 +48,12 @@ export default function PlatformSectionContent({
         return;
       }
 
-      gsap.set(image, { y: 24, opacity: 0 });
+      gsap.set(image, { opacity: 0 });
       gsap.set(text, { y: 24, opacity: 0 });
 
       revealTl = gsap.timeline({ paused: true });
       revealTl
-        .to(image, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" })
+        .to(image, { opacity: 1, duration: 0.9, ease: "power3.out" })
         .to(
           text,
           { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
@@ -81,42 +81,38 @@ export default function PlatformSectionContent({
   return (
     <div
       ref={rootRef}
-      className={`flex min-h-svh w-full flex-col justify-center bg-[#0b1d36] text-white ${className}`.trim()}
+      className={`relative flex min-h-svh w-full flex-col justify-center overflow-hidden bg-[#0b1d36] text-white ${className}`.trim()}
     >
+      <div ref={imageRef} aria-hidden="true" className="absolute inset-0">
+        <ShimmerImage
+          src="/images/bridge-china.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover transition-opacity duration-500"
+        />
+        <div className="absolute inset-0 bg-[#0b1d36]/75" />
+      </div>
+
       <div
         ref={triggerRef}
-        className="w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20"
+        className="relative w-full px-6 py-20 md:px-10 md:py-24 lg:px-14 lg:py-28 xl:px-20"
       >
-        <div className="grid w-full items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
-          <div
-            ref={imageRef}
-            className="relative aspect-[4/3] w-full overflow-hidden rounded-xl"
+        <div ref={textRef} className="mx-auto max-w-3xl text-center">
+          <h2
+            id="approach-heading"
+            className={`${playfair.className} text-[2.1rem] leading-[1.12] font-medium tracking-tight text-white md:text-[2.5rem] md:leading-[1.1] lg:text-[2.85rem] lg:leading-[1.08]`}
           >
-            <ShimmerImage
-              src="/images/bridge-china.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover transition-opacity duration-500"
-            />
-          </div>
+            {headline}
+          </h2>
 
-          <div ref={textRef}>
-            <h2
-              id="approach-heading"
-              className={`${playfair.className} text-[2.1rem] leading-[1.12] font-medium tracking-tight text-white md:text-[2.5rem] md:leading-[1.1] lg:text-[2.85rem] lg:leading-[1.08]`}
-            >
-              {headline}
-            </h2>
-
-            <p className="mt-6 text-base leading-relaxed text-white/85 md:mt-8 md:text-[1.05rem] md:leading-8">
-              {intro}
-            </p>
-          </div>
+          <p className="mt-6 text-base leading-relaxed text-white/85 md:mt-8 md:text-[1.05rem] md:leading-8">
+            {intro}
+          </p>
         </div>
 
         {footnote ? (
-          <p className="mt-14 text-sm text-white/60 italic md:mt-16 lg:mt-20">
+          <p className="mx-auto mt-14 max-w-3xl text-center text-sm text-white/60 italic md:mt-16 lg:mt-20">
             {footnote}
           </p>
         ) : null}

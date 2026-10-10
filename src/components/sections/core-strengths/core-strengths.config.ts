@@ -7,17 +7,17 @@ export type Sector = {
   items: string[];
 };
 
-export type StrategyIcon =
+export type CoreStrengthIcon =
   | "pipeline"
   | "industrial"
   | "cross-border"
   | "sectors";
 
-export type Strategy =
+export type CoreStrength =
   | {
       type: "row";
       id: string;
-      icon: StrategyIcon;
+      icon: CoreStrengthIcon;
       image: string;
       /** Crop anchor for the image panel; defaults to centered. */
       imagePosition?: "top" | "center" | "bottom";
@@ -27,7 +27,7 @@ export type Strategy =
   | {
       type: "grid";
       id: string;
-      icon: StrategyIcon;
+      icon: CoreStrengthIcon;
       image: string;
       heading: string;
       intro: string;
@@ -35,16 +35,16 @@ export type Strategy =
       sectors: Sector[];
     };
 
-export type StrategiesContent = {
+export type CoreStrengthsContent = {
   eyebrow: string;
   heading: string;
   intro: string;
-  items: Strategy[];
+  items: CoreStrength[];
 };
 
-export const STRATEGIES_CONTENT: StrategiesContent = {
+export const CORE_STRENGTHS_CONTENT: CoreStrengthsContent = {
   eyebrow: "Platform",
-  heading: "Core strengths",
+  heading: "Core Strengths",
   intro:
     "The firm focuses on growth stage to pre-IPO technology companies. We prefer businesses whose technologies have achieved commercial validation with clear paths to industrialisation and established revenue streams. We participate in quality projects through minority investments, co investments and dedicated fund structures, with investment sizes tailored to meet the capital requirements of different stages.",
   items: [
@@ -69,7 +69,7 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
       id: "cross-border",
       icon: "cross-border",
       image: "/images/core_str_img_2160654964.jpeg",
-      heading: "Cross-border Capital Access",
+      heading: "Cross-Border Capital Access",
       body: "Operating out of Hong Kong, the firm has built a cross-border capital network that spans China, the Middle East and other emerging markets. We help Chinese technology companies expand into overseas markets while also providing international capital with professional access to China’s deep technology sector. This two-way capability positions us uniquely within the broader trends of cross border technology transfer and industrial global expansion.",
     },
     {
@@ -77,7 +77,7 @@ export const STRATEGIES_CONTENT: StrategiesContent = {
       id: "sector-coverage",
       icon: "sectors",
       image: "/images/core_str_img_2034735552.jpeg",
-      heading: "Multi-sector Investment Coverage",
+      heading: "Multi-Sector Investment Coverage",
       intro:
         "The firm's investment mandate covers multiple high growth technology sectors including artificial intelligence and intelligent computing, advanced manufacturing and industrial automation, new energy and energy transition, semiconductors and information technology, and frontier technologies. We focus not only on leading projects within individual sectors but also on cross sector synergies and technological convergence, identifying structural investment opportunities at the intersection of different industries. ",
       lead: "The firm focuses on growth stage and pre-IPO investments across the following high growth technology sectors.",

@@ -8,22 +8,22 @@ import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
 import ShimmerImage from "@/components/ShimmerImage";
-import { STRATEGIES_CONTENT, type StrategiesContent } from "./strategies/strategies.config";
+import { CORE_STRENGTHS_CONTENT, type CoreStrengthsContent } from "./core-strengths/core-strengths.config";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
-type StrategiesSectionProps = {
+type CoreStrengthsSectionProps = {
   className?: string;
-  content?: StrategiesContent;
+  content?: CoreStrengthsContent;
 };
 
-export default function StrategiesSection({
+export default function CoreStrengthsSection({
   className = "",
-  content = STRATEGIES_CONTENT,
-}: StrategiesSectionProps) {
+  content = CORE_STRENGTHS_CONTENT,
+}: CoreStrengthsSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -40,14 +40,14 @@ export default function StrategiesSection({
     let revealTl: gsap.core.Timeline | null = null;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>("[data-strategy-card]", contentEl);
+      const cards = gsap.utils.toArray<HTMLElement>("[data-core-strength-card]", contentEl);
       if (reducedMotion) {
-        const header = contentEl.querySelector("[data-strategy-header]");
+        const header = contentEl.querySelector("[data-core-strength-header]");
         gsap.set([header, ...cards], { opacity: 1, y: 0 });
         return;
       }
 
-      gsap.set(contentEl.querySelector("[data-strategy-header]"), {
+      gsap.set(contentEl.querySelector("[data-core-strength-header]"), {
         y: 40,
         opacity: 0,
       });
@@ -55,7 +55,7 @@ export default function StrategiesSection({
 
       revealTl = gsap.timeline({ paused: true });
       revealTl
-        .to("[data-strategy-header]", {
+        .to("[data-core-strength-header]", {
           y: 0,
           opacity: 1,
           duration: 0.95,
@@ -92,20 +92,20 @@ export default function StrategiesSection({
   return (
     <section
       ref={sectionRef}
-      id="platform"
+      id="core-strengths"
       className={`w-full bg-[#0b1d36] text-white ${className}`.trim()}
-      aria-labelledby="platform-heading"
+      aria-labelledby="core-strengths-heading"
     >
       <div
         ref={contentRef}
         className="w-full px-6 py-24 md:px-10 md:py-28 lg:px-14 lg:py-32 xl:px-20"
       >
-        <header data-strategy-header className="max-w-6xl opacity-0">
+        <header data-core-strength-header className="max-w-6xl opacity-0">
           <p className="font-mono text-[11px] font-medium tracking-[0.28em] text-white/45 uppercase">
             {eyebrow}
           </p>
           <h2
-            id="platform-heading"
+            id="core-strengths-heading"
             className={`${playfair.className} mt-5 text-4xl leading-[1.08] font-medium tracking-tight md:text-5xl lg:text-[3.25rem]`}
           >
             {heading}
@@ -120,7 +120,7 @@ export default function StrategiesSection({
             <Link
               key={item.id}
               href={`/core-strengths/${item.id}`}
-              data-strategy-card
+              data-core-strength-card
               className="group relative flex aspect-[4/3] w-full flex-col justify-end overflow-hidden rounded-xl border border-white/10 opacity-0 transition-[border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:border-[#ed7d24]/40 active:scale-[0.98]"
             >
               <ShimmerImage

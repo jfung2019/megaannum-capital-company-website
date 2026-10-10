@@ -20,7 +20,7 @@ export type ContactContent = {
 
 export const CONTACT_CONTENT: ContactContent = {
   eyebrow: "Contact",
-  heading: "Discuss a partnership or co-investment.",
+  heading: "Discuss a Partnership or Co-Investment.",
   subhead:
     "Speak with our team about co-investments, dedicated fund structures, or professional access to China’s deep technology sector from Hong Kong.",
   details: [

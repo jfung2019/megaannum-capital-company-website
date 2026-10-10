@@ -58,7 +58,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: "#mission", label: "Mission" },
   { href: "#approach", label: "Approach" },
   { href: "#partners", label: "Partners" },
-  { href: "#platform", label: "Core Strengths" },
+  { href: "#core-strengths", label: "Core Strengths" },
   { href: "#contact", label: "Contact", cta: true },
 ];
 
@@ -87,7 +87,7 @@ export const HERO_CONTENT: HeroContent = {
       poster: "/images/hero-poster-shenzhen.jpg",
       headingLines: [
         {
-          text: "Cultivating enduring technology enterprises.",
+          text: "Cultivating Enduring Technology Enterprises.",
           color: "#ffffff",
           leadColor: "#ed7d24",
         },

@@ -5,7 +5,7 @@ import { Playfair_Display } from "next/font/google";
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
 import ShimmerImage from "@/components/ShimmerImage";
-import { STRATEGIES_CONTENT } from "@/components/sections/strategies/strategies.config";
+import { CORE_STRENGTHS_CONTENT } from "@/components/sections/core-strengths/core-strengths.config";
 import StrengthSectorGrid from "./StrengthSectorGrid";
 
 const playfair = Playfair_Display({
@@ -18,18 +18,18 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return STRATEGIES_CONTENT.items.map((item) => ({ slug: item.id }));
+  return CORE_STRENGTHS_CONTENT.items.map((item) => ({ slug: item.id }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const item = STRATEGIES_CONTENT.items.find((i) => i.id === slug);
+  const item = CORE_STRENGTHS_CONTENT.items.find((i) => i.id === slug);
   return { title: item ? `${item.heading} — Megaannum Capital` : "Not found" };
 }
 
 export default async function CoreStrengthPage({ params }: PageProps) {
   const { slug } = await params;
-  const item = STRATEGIES_CONTENT.items.find((i) => i.id === slug);
+  const item = CORE_STRENGTHS_CONTENT.items.find((i) => i.id === slug);
   if (!item) notFound();
 
   const paragraphs = (item.type === "row" ? item.body : item.intro).split("\n\n");
@@ -37,13 +37,13 @@ export default async function CoreStrengthPage({ params }: PageProps) {
   const eyebrowBlock = (
     <>
       <Link
-        href="/#platform"
+        href="/#core-strengths"
         className="font-mono text-[11px] tracking-[0.2em] text-black/45 uppercase transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#ed7d24]"
       >
-        &larr; Core strengths
+        &larr; Core Strengths
       </Link>
       <p className="mt-8 font-mono text-[11px] font-medium tracking-[0.28em] text-black/45 uppercase">
-        Core strengths
+        Core Strengths
       </p>
       <h1
         className={`${playfair.className} mt-4 text-4xl leading-[1.08] font-medium tracking-tight text-[#1a1714] md:text-5xl`}

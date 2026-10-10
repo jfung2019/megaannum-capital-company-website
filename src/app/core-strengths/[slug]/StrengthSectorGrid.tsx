@@ -6,7 +6,7 @@ import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
 
 import { revealOnScroll } from "@/lib/gsap/revealOnScroll";
-import type { Sector, SectorIcon } from "@/components/sections/strategies/strategies.config";
+import type { Sector, SectorIcon } from "@/components/sections/core-strengths/core-strengths.config";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],

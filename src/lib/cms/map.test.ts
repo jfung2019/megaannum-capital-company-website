@@ -8,14 +8,14 @@ import { HERO_CONTENT } from "@/components/hero/hero.config";
 import { CONTACT_CONTENT } from "@/components/sections/contact/contact.config";
 import { PARTNERS } from "@/components/sections/partners/partners.config";
 import { BOARD_CONTENT } from "@/components/sections/people/people.config";
-import { PLATFORM_CONTENT } from "@/components/sections/platform/platform.config";
+import { APPROACH_CONTENT } from "@/components/sections/approach/approach.config";
 import {
   contactContent,
   heroContent,
   parseStat,
   partnerList,
   peopleContent,
-  platformContent,
+  approachContent,
 } from "@/lib/cms/map";
 
 beforeAll(() => {
@@ -109,7 +109,7 @@ describe("mapping a published payload", () => {
       body: "CMS body copy.",
     });
 
-    expect(platformContent(raw)).toEqual({
+    expect(approachContent(raw)).toEqual({
       headline: "Published heading",
       intro: "Published paragraph.",
       introHeadings: [],
@@ -169,7 +169,7 @@ describe("falling back to the bundled configs", () => {
     ["lists of junk", { edge: { stats: [1, "a"] }, partners: [null], team: { board: ["x"] } }],
   ])("yields the defaults for %s", (_name, raw) => {
     expect(heroContent(raw)).toEqual(HERO_CONTENT);
-    expect(platformContent(raw)).toEqual(PLATFORM_CONTENT);
+    expect(approachContent(raw)).toEqual(APPROACH_CONTENT);
     expect(peopleContent(raw)).toEqual(BOARD_CONTENT);
     expect(contactContent(raw)).toEqual(CONTACT_CONTENT);
     expect(partnerList(raw).map((p) => p.name)).toEqual(PARTNERS.map((p) => p.name));
@@ -197,7 +197,7 @@ describe("falling back to the bundled configs", () => {
     // The CMS defaults its newer fields to "" so older documents parse. Those
     // must show the bundled copy, not an empty heading.
     const raw = { ...payload(), edge: { ...payload().edge, heading: "" } };
-    expect(platformContent(raw).headline).toBe(PLATFORM_CONTENT.headline);
+    expect(approachContent(raw).headline).toBe(APPROACH_CONTENT.headline);
 
     const team = { ...payload().team, eyebrow: "", portfolioHeading: "" };
     expect(peopleContent({ team }).eyebrow).toBe(BOARD_CONTENT.eyebrow);
@@ -214,7 +214,7 @@ describe("falling back to the bundled configs", () => {
         { id: "b", value: "many", label: "Bad" },
       ],
     };
-    expect(platformContent({ edge }).stats).toEqual([
+    expect(approachContent({ edge }).stats).toEqual([
       { value: 41, prefix: "$", suffix: "B", label: "Good" },
     ]);
   });

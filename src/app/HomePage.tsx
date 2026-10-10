@@ -1,12 +1,12 @@
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/hero/HeroSection";
 import MissionSection from "@/components/sections/MissionSection";
-import PlatformSection from "@/components/sections/PlatformSection";
+import ApproachSection from "@/components/sections/ApproachSection";
 import PartnersSection from "@/components/sections/PartnersSection";
-import StrategiesSection from "@/components/sections/StrategiesSection";
+import CoreStrengthsSection from "@/components/sections/CoreStrengthsSection";
 import { PARTNERS } from "@/components/sections/partners/partners.config";
 import { getSiteContent } from "@/lib/cms/client";
-import { heroContent, partnerList, platformContent } from "@/lib/cms/map";
+import { heroContent, partnerList, approachContent } from "@/lib/cms/map";
 
 export default async function HomePage() {
   // Server-side on purpose. The sections' GSAP effects snapshot the DOM once at
@@ -26,10 +26,10 @@ export default async function HomePage() {
     <main className="relative bg-[#f6f3ec]">
       <HeroSection content={heroContent(cms)} />
       <MissionSection />
-      <PlatformSection content={platformContent(cms)} />
+      <ApproachSection content={approachContent(cms)} />
       <PartnersSection cmsPartners={cmsPartners} />
       <div data-page-continuation className="relative z-10">
-        <StrategiesSection />
+        <CoreStrengthsSection />
         <Footer />
       </div>
     </main>
