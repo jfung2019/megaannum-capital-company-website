@@ -2,7 +2,7 @@ import type { ComponentType } from "react";
 
 import type { CmsImage } from "@/lib/cms/map";
 
-import { CasLogo, SdicLogo, ShanghaiElectricLogo } from "./PartnerLogos";
+import { CasLogo } from "./PartnerLogos";
 
 /**
  * What the section actually renders. A CMS partner carries `image`; a bundled
@@ -30,6 +30,4 @@ export const PARTNERS_CONTENT: PartnersContent = {
 
 export const PARTNERS: PartnerView[] = [
   { id: "cas", name: "Chinese Academy of Sciences", image: null, Logo: CasLogo },
-  { id: "shanghai-electric", name: "Shanghai Electric", image: null, Logo: ShanghaiElectricLogo },
-  { id: "sdic", name: "SDIC", image: null, Logo: SdicLogo },
 ];
