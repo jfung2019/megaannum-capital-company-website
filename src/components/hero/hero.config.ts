@@ -57,6 +57,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: "#home", label: "Home" },
   { href: "#mission", label: "Mission" },
   { href: "#approach", label: "Approach" },
+  { href: "#partners", label: "Partners" },
   { href: "#core-strengths", label: "Core Strengths" },
   { href: "#contact", label: "Contact", cta: true },
 ];

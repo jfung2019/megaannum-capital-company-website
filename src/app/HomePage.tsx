@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/hero/HeroSection";
 import MissionSection from "@/components/sections/MissionSection";
 import ApproachSection from "@/components/sections/ApproachSection";
+import PartnersSection from "@/components/sections/PartnersSection";
 import CoreStrengthsSection from "@/components/sections/CoreStrengthsSection";
 import { getSiteContent } from "@/lib/cms/client";
 import { heroContent, approachContent } from "@/lib/cms/map";
@@ -19,6 +20,7 @@ export default async function HomePage() {
       <HeroSection content={heroContent(cms)} />
       <MissionSection />
       <ApproachSection content={approachContent(cms)} />
+      <PartnersSection />
       <div data-page-continuation className="relative z-10">
         <CoreStrengthsSection />
         <Footer />
