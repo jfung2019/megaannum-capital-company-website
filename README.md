@@ -26,6 +26,8 @@ git pull
 docker compose up -d --build
 ```
 
+Full release steps, checks and rollback are in the [Deployment Runbook](https://dev.azure.com/Megaannum/6a7d3519-5c90-4955-878e-0feb380b1df1/_wiki/wikis/89d5b1e6-99c0-4ab9-9a4b-11df6b95879d?pagePath=%2FDeployment%20Runbook) wiki page.
+
 Do not publish port 3000. Firewall should allow 80 and 443 only (plus 22 for SSH).
 
 If `www.megaannumcap.com` is not in DNS, remove that name from `Caddyfile`.
