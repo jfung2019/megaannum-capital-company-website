@@ -17,10 +17,6 @@ import {
   type ContactDetail,
 } from "@/components/sections/contact/contact.config";
 import {
-  PARTNERS,
-  type PartnerView,
-} from "@/components/sections/partners/partners.config";
-import {
   BOARD_CONTENT,
   type PeopleContent,
   type TeamMember,
@@ -145,25 +141,6 @@ export function approachContent(raw: unknown): ApproachContent {
   };
 }
 
-/** The bundled partners carry a Logo component; CMS partners carry an image. */
-export function partnerList(raw: unknown): PartnerView[] {
-  const fallback = (): PartnerView[] => PARTNERS;
-
-  const partners = rows(obj(raw).partners);
-  if (!partners) return fallback();
-
-  const mapped = partners
-    .map((p, i) => ({
-      id: str(p.id, `partner-${i}`),
-      name: str(p.name, ""),
-      image: imageUrl(p.logo),
-      Logo: null,
-    }))
-    // A partner with neither a name nor a logo has nothing to render.
-    .filter((p) => p.name || p.image);
-  return mapped.length ? mapped : fallback();
-}
-
 function member(m: Rec, index: number): TeamMember {
   const name = str(m.name, "");
   const role = str(m.title, "");
@@ -210,8 +187,6 @@ export function contactContent(raw: unknown): ContactContent {
     .filter((d) => d.label && d.value);
   return {
     eyebrow: str(contact.eyebrow, CONTACT_CONTENT.eyebrow),
-    heading: str(contact.headline, CONTACT_CONTENT.heading),
-    subhead: str(contact.sub, CONTACT_CONTENT.subhead),
     details: details?.length ? details : CONTACT_CONTENT.details,
     // The form labels have no CMS source: they are markup, not copy.
     form: CONTACT_CONTENT.form,

@@ -29,7 +29,7 @@ export type ApproachContent = {
 export const APPROACH_CONTENT: ApproachContent = {
   headline: "Bridging China's Frontier Science with Global Capital.",
   intro:
-    "China’s research institutions, led by the Chinese Academy of Sciences, continue to drive foundational breakthroughs across artificial intelligence, advanced materials, and clean energy. Translating laboratory innovation into scalable global enterprises requires dedicated operational stewardship, just as international investors require disciplined local execution and rigorous due diligence to access these high-conviction opportunities. Embedded within China’s technology transfer ecosystem, Megaannum Capital bridges this divide. We align institutional standards with deep industrial access, enabling global capital to effectively partner with transformative science and build resilient, world-class enterprises.",
+    "China’s leading research institutions continue to drive foundational breakthroughs across artificial intelligence, advanced materials, and clean energy. Translating laboratory innovation into scalable global enterprises requires dedicated operational stewardship, just as international investors require disciplined local execution and rigorous due diligence to access these high-conviction opportunities. Embedded within China’s technology transfer ecosystem, Megaannum Capital bridges this divide. We align institutional standards with deep industrial access, enabling global capital to effectively partner with transformative science and build resilient, world-class enterprises.",
   introHeadings: [],
   stats: [
     {

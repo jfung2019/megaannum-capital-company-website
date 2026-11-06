@@ -54,7 +54,7 @@ export const CORE_STRENGTHS_CONTENT: CoreStrengthsContent = {
       icon: "pipeline",
       image: "/images/core_str_img_165717610.jpeg",
       heading: "Proprietary Technology Pipeline",
-      body: "The firm maintains a strategic partnership with the Chinese Academy of Sciences ecosystem. This relationship provides direct access to commercially viable projects emerging from China’s leading research institutions in fields such as artificial intelligence, semiconductors, advanced materials, robotics and new energy. Through this unique channel, we are able to conduct commercial screening and value discovery on high-quality deep technology assets before they enter the public markets.",
+      body: "The firm maintains a strategic partnership with a leading national research ecosystem in China. This relationship provides direct access to commercially viable projects emerging from China’s leading research institutions in fields such as artificial intelligence, semiconductors, advanced materials, robotics and new energy. Through this unique channel, we are able to conduct commercial screening and value discovery on high-quality deep technology assets before they enter the public markets.",
     },
     {
       type: "row",

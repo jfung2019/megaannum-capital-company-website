@@ -6,14 +6,12 @@ const BASE = "http://cms.test/api/v1";
 
 import { HERO_CONTENT } from "@/components/hero/hero.config";
 import { CONTACT_CONTENT } from "@/components/sections/contact/contact.config";
-import { PARTNERS } from "@/components/sections/partners/partners.config";
 import { BOARD_CONTENT } from "@/components/sections/people/people.config";
 import { APPROACH_CONTENT } from "@/components/sections/approach/approach.config";
 import {
   contactContent,
   heroContent,
   parseStat,
-  partnerList,
   peopleContent,
   approachContent,
 } from "@/lib/cms/map";
@@ -45,7 +43,6 @@ function payload() {
         { id: "b", value: "20,000+", label: "Decisions made" },
       ],
     },
-    partners: [{ id: "p1", name: "Northmark", logo: img("logo-1") }],
     team: {
       eyebrow: "CMS eyebrow",
       heading: "CMS heading",
@@ -121,19 +118,6 @@ describe("mapping a published payload", () => {
       background: "#123456",
     });
 
-    expect(partnerList(raw)).toEqual([
-      {
-        id: "p1",
-        name: "Northmark",
-        image: {
-          url: `${BASE}/content/images/logo-1`,
-          width: 100,
-          height: 50,
-          mime: "image/png",
-        },
-        Logo: null,
-      },
-    ]);
 
     const people = peopleContent(raw);
     expect(people.eyebrow).toBe("CMS eyebrow");
@@ -164,15 +148,14 @@ describe("falling back to the bundled configs", () => {
     ["undefined", undefined],
     ["empty object", {}],
     ["a string", "nonsense"],
-    ["wrong-typed fields", { edge: 5, team: [], contact: "x", partners: {}, landing: 0 }],
-    ["empty lists", { edge: { stats: [] }, team: { board: [] }, contact: { blocks: [] }, partners: [] }],
-    ["lists of junk", { edge: { stats: [1, "a"] }, partners: [null], team: { board: ["x"] } }],
+    ["wrong-typed fields", { edge: 5, team: [], contact: "x", landing: 0 }],
+    ["empty lists", { edge: { stats: [] }, team: { board: [] }, contact: { blocks: [] } }],
+    ["lists of junk", { edge: { stats: [1, "a"] }, team: { board: ["x"] } }],
   ])("yields the defaults for %s", (_name, raw) => {
     expect(heroContent(raw)).toEqual(HERO_CONTENT);
     expect(approachContent(raw)).toEqual(APPROACH_CONTENT);
     expect(peopleContent(raw)).toEqual(BOARD_CONTENT);
     expect(contactContent(raw)).toEqual(CONTACT_CONTENT);
-    expect(partnerList(raw).map((p) => p.name)).toEqual(PARTNERS.map((p) => p.name));
   });
 
   it("keeps the bundled clip when the CMS has no hero video", () => {
@@ -237,9 +220,17 @@ describe("falling back to the bundled configs", () => {
     // The CMS route has no file extension, so next/image can't tell an SVG
     // from a raster image by URL alone -- it 400s trying to optimize one.
     const raw = {
-      partners: [{ id: "p1", name: "Acme", logo: img("logo-1") }],
+      team: {
+        board: [
+          {
+            id: "m1",
+            name: "Acme",
+            title: "Chair",
+            photo: { id: "photo-1", width: 100, height: 50, mime: "image/svg+xml" },
+          },
+        ],
+      },
     };
-    raw.partners[0].logo = { id: "logo-1", width: 100, height: 50, mime: "image/svg+xml" };
-    expect(partnerList(raw)[0].image?.mime).toBe("image/svg+xml");
+    expect(peopleContent(raw).members[0].imageMime).toBe("image/svg+xml");
   });
 });

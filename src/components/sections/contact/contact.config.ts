@@ -6,8 +6,6 @@ export type ContactDetail = {
 
 export type ContactContent = {
   eyebrow: string;
-  heading: string;
-  subhead: string;
   details: ContactDetail[];
   form: {
     nameLabel: string;
@@ -20,9 +18,6 @@ export type ContactContent = {
 
 export const CONTACT_CONTENT: ContactContent = {
   eyebrow: "Contact",
-  heading: "Discuss a Partnership or Co-Investment.",
-  subhead:
-    "Speak with our team about co-investments, dedicated fund structures, or professional access to China’s deep technology sector from Hong Kong.",
   details: [
     { label: "General enquiries", value: "enquiries@megaannumcap.com", href: "mailto:enquiries@megaannumcap.com" },
     // { label: "Careers", value: "careers@megaannumcap.com", href: "mailto:careers@megaannumcap.com" },

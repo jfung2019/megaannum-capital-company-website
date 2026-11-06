@@ -38,12 +38,6 @@ export default function Footer({ className = "" }: FooterProps) {
             <p className="font-mono text-[10px] font-medium tracking-[0.2em] text-black/45 uppercase">
               Contact Us
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-black/70">
-              {CONTACT_CONTENT.heading}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-black/55">
-              {CONTACT_CONTENT.subhead}
-            </p>
             <ul className="mt-4 space-y-3 text-sm text-black/70">
               {emailDetail?.href ? (
                 <li>
